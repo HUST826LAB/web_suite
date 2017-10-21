@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="826_webSuite:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="spring-test-001.war">
+      <element id="artifact" artifact-name="826_webSuite:war exploded" />
+    </root>
+  </artifact>
+</component>
