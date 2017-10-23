@@ -22,5 +22,5 @@
 
     <!--视图解析器-->
     <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
-
+    <import resource="application_config.xml"/>
 </beans>
