@@ -7,11 +7,15 @@ import java.util.List;
 
 public class JsonUtil {
 
-    public MappingJacksonValue getJsonp(List lst, String callback){
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("status",0);
-        jsonObject.put("result",0);
-        jsonObject.put("data",lst);
+    private JsonUtil(){}
+
+    private static JsonUtil jsonUtil = new JsonUtil();
+
+    public static JsonUtil getInstense(){
+        return jsonUtil;
+    }
+
+    public MappingJacksonValue getJsonp(JSONObject jsonObject, String callback){
         MappingJacksonValue mappingJacksonValue = new MappingJacksonValue(jsonObject);
         if(callback!=null){
             mappingJacksonValue.setJsonpFunction(callback);

@@ -15,7 +15,7 @@
     <mysql-connector.version>5.0.5</mysql-connector.version>
     <druid.version>1.0.4</druid.version>
     <spring.version>4.3.11.RELEASE</spring.version>
-    <log4j.version>1.2.17</log4j.version>
+    <logback.version>1.1.7</logback.version>
     <slf4j.version>1.7.5</slf4j.version>
     <junit.version>4.11</junit.version>
     <dom4j.version>1.6.1</dom4j.version>
@@ -131,9 +131,19 @@
 
     <!-- Log Dependencies -->
     <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>${log4j.version}</version>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-core</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-access</artifactId>
+      <version>${logback.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>ch.qos.logback</groupId>
+      <artifactId>logback-classic</artifactId>
+      <version>${logback.version}</version>
     </dependency>
 
     <dependency>
@@ -269,11 +279,16 @@
       <artifactId>fastjson</artifactId>
       <version>1.2.39</version>
     </dependency>
+      <dependency>
+          <groupId>org.jetbrains</groupId>
+          <artifactId>annotations-java5</artifactId>
+          <version>RELEASE</version>
+      </dependency>
   </dependencies>
   <!--file end-->
 
   <build>
-    <finalName>spring-test-001</finalName>
+    <finalName>826_webSuite</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
