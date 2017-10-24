@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class TUser implements Serializable {
 
-    private Integer user_id;
+    private Long user_id;
     private String username;
     private String uname;
     private String ip;
@@ -13,8 +13,8 @@ public class TUser implements Serializable {
     private Integer star;
     private Integer constellation;
     private String address;
-    private Integer score;
-    private Integer gold;
+    private Long score;
+    private Long gold;
     private String group;
     private Integer star_a;
     private Integer star_b;
@@ -24,13 +24,13 @@ public class TUser implements Serializable {
     private String create_time;
     private String approve_time;
     private Integer status;
-    private Integer approver;
+    private Long approver;
 
-    public Integer getUser_id() {
+    public Long getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(Integer user_id) {
+    public void setUser_id(Long user_id) {
         this.user_id = user_id;
     }
 
@@ -98,19 +98,19 @@ public class TUser implements Serializable {
         this.address = address;
     }
 
-    public Integer getScore() {
+    public Long getScore() {
         return score;
     }
 
-    public void setScore(Integer score) {
+    public void setScore(Long score) {
         this.score = score;
     }
 
-    public Integer getGold() {
+    public Long getGold() {
         return gold;
     }
 
-    public void setGold(Integer gold) {
+    public void setGold(Long gold) {
         this.gold = gold;
     }
 
@@ -186,13 +186,11 @@ public class TUser implements Serializable {
         this.status = status;
     }
 
-    public Integer getApprover() {
+    public Long getApprover() {
         return approver;
     }
 
-    public void setApprover(Integer approver) {
+    public void setApprover(Long approver) {
         this.approver = approver;
     }
-
-
 }
