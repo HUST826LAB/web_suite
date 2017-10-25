@@ -17,6 +17,7 @@ public class TRes {
   private Long referee;
   private String deviation;
   private Long time_len;
+  private String location_id;
 
   public Long getRes_id() {
     return res_id;
@@ -144,5 +145,35 @@ public class TRes {
 
   public void setTime_len(Long time_len) {
     this.time_len = time_len;
+  }
+
+  public String getLocation_id() {
+    return location_id;
+  }
+
+  public void setLocation_id(String location_id) {
+    this.location_id = location_id;
+  }
+
+  @Override
+  public String toString(){
+    StringBuilder stringBuilder = new StringBuilder();
+    return stringBuilder.append("入参为:[res_id=").append(res_id+",")
+            .append("user_id=").append(user_id+",")
+            .append("coordinate=").append(coordinate+",")
+            .append("ip=").append(ip+",")
+            .append("device=").append(device+",")
+            .append("sex=").append(sex+",")
+            .append("constellation=").append(constellation+",")
+            .append("blood=").append(blood+",")
+            .append("address=").append(address+",")
+            .append("score=").append(score+",")
+            .append("gold=").append(gold+",")
+            .append("group=").append(group+",")
+            .append("create_time=").append(create_time+",")
+            .append("referee=").append(referee+",")
+            .append("deviation=").append(deviation+",")
+            .append("time_len=").append(time_len+",")
+            .append("location_id=").append(location_id+"]").toString();
   }
 }

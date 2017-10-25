@@ -25,4 +25,16 @@ public class TUserService {
     public List<TopTenList> getScoreTopTen(){
         return  TUserDao.getScoreTopTen();
     }
+
+    public Integer getUserCountById(Long id){
+        return TUserDao.getUserCountById(id);
+    }
+
+    public TUser getUserScoreAndGoldByID(Long id){
+        return TUserDao.getUserScoreAndGoldByID(id);
+    }
+
+    public void updateGoldAndScoreById(TUser user){
+        TUserDao.updateGoldAndScoreById(user);
+    }
 }

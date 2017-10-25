@@ -35,6 +35,7 @@ public class IndexController {
      * 首页接口
      * author:陈震威
      * bug联系方式：zhenweichen.ron@foxmail.com
+     * 敬祝码祺
      */
     @ResponseBody
     @CrossOrigin(origins = "*")

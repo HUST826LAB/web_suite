@@ -63,6 +63,7 @@
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.8.5" />
           <element id="library" level="project" name="Maven: com.alibaba:fastjson:1.2.39" />
           <element id="library" level="project" name="Maven: org.jetbrains:annotations-java5:15.0" />
+          <element id="library" level="project" name="Maven: com.google.guava:guava:19.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
