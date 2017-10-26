@@ -60,12 +60,17 @@
     <!-- 通知 配置传播行为-->
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
         <tx:attributes>
+            <!-- 保存单个 -->
             <tx:method name="save*" propagation="REQUIRED"/>
+            <!-- 删除 -->
             <tx:method name="delete*" propagation="REQUIRED"/>
-            <tx:method name="add*" propagation="REQUIRED"/>
+            <!-- 更新 -->
             <tx:method name="update*" propagation="REQUIRED"/>
+            <!-- 查询单个 -->
             <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <!-- 搜索多个 -->
             <tx:method name="select*" propagation="SUPPORTS" read-only="true"/>
+            <!-- count -->
             <tx:method name="count*" read-only="true"/>
             <!-- 对其他方法 使用默认的事务管理 -->
             <tx:method name="*"/>

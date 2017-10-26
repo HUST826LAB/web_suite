@@ -2,7 +2,7 @@
     <!-- 动态日志级别 -->
     <jmxConfigurator />
     <!-- 定义日志文件 输出位置 -->
-    <property name="log_dir" value="D:/test" />
+    <property name="log_dir" value="./../logs" />
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30" />
     <!-- ConsoleAppender 控制台输出日志 -->

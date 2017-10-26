@@ -50,21 +50,21 @@ public class IndexController {
         Long resCount = 0l;
         JSONObject jsonObject = new JSONObject();
         try {
-            goldLst = TUserService.getGoldTopTen();
-            scoreLst = TUserService.getScoreTopTen();
-            resCount = TResService.getResCount();
+            goldLst = TUserService.selectGoldTopTen();
+            scoreLst = TUserService.selectScoreTopTen();
+            resCount = TResService.countResCount();
         }catch (Exception e){
             logger.error("index接口查询数据库出现问题:"+e.getMessage());
-            WrapJson.getInstance().wrapJson(jsonObject,Status.Error.getMsg(),Status.Error.getCode(),null);
+            WrapJson.wrapJson(jsonObject,Status.Error.getMsg(),Status.Error.getCode(),null);
         }
         JSONObject paramMap = new JSONObject();
         if (goldLst.isEmpty()||scoreLst.isEmpty()){
-            WrapJson.getInstance().wrapJson(jsonObject,Status.Fail.getMsg(),Status.Fail.getCode(),paramMap);
+            WrapJson.wrapJson(jsonObject,Status.Fail.getMsg(),Status.Fail.getCode(),paramMap);
         }else {
             paramMap.put("gold",goldLst);
             paramMap.put("score",scoreLst);
             paramMap.put("resCount",resCount);
-            WrapJson.getInstance().wrapJson(jsonObject,Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),paramMap);
+            WrapJson.wrapJson(jsonObject,Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),paramMap);
         }
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }

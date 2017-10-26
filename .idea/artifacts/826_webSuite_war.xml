@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="826_webSuite:war">
+  <artifact type="war" build-on-make="true" name="826_webSuite:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <root id="archive" name="826_webSuite.war">
       <element id="artifact" artifact-name="826_webSuite:war exploded" />

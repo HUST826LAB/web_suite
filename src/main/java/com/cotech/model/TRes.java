@@ -6,9 +6,9 @@ public class TRes {
   private String coordinate;
   private String ip;
   private String device;
-  private Long sex;
-  private Long constellation;
-  private Long blood;
+  private Integer sex;
+  private Integer constellation;
+  private Integer blood;
   private String address;
   private Long score;
   private Long gold;
@@ -59,27 +59,27 @@ public class TRes {
     this.device = device;
   }
 
-  public Long getSex() {
+  public Integer getSex() {
     return sex;
   }
 
-  public void setSex(Long sex) {
+  public void setSex(Integer sex) {
     this.sex = sex;
   }
 
-  public Long getConstellation() {
+  public Integer getConstellation() {
     return constellation;
   }
 
-  public void setConstellation(Long constellation) {
+  public void setConstellation(Integer constellation) {
     this.constellation = constellation;
   }
 
-  public Long getBlood() {
+  public Integer getBlood() {
     return blood;
   }
 
-  public void setBlood(Long blood) {
+  public void setBlood(Integer blood) {
     this.blood = blood;
   }
 
@@ -157,23 +157,6 @@ public class TRes {
 
   @Override
   public String toString(){
-    StringBuilder stringBuilder = new StringBuilder();
-    return stringBuilder.append("入参为:[res_id=").append(res_id+",")
-            .append("user_id=").append(user_id+",")
-            .append("coordinate=").append(coordinate+",")
-            .append("ip=").append(ip+",")
-            .append("device=").append(device+",")
-            .append("sex=").append(sex+",")
-            .append("constellation=").append(constellation+",")
-            .append("blood=").append(blood+",")
-            .append("address=").append(address+",")
-            .append("score=").append(score+",")
-            .append("gold=").append(gold+",")
-            .append("group=").append(group+",")
-            .append("create_time=").append(create_time+",")
-            .append("referee=").append(referee+",")
-            .append("deviation=").append(deviation+",")
-            .append("time_len=").append(time_len+",")
-            .append("location_id=").append(location_id+"]").toString();
+    return String.format("入参为:[res_id=%d,user_id=%d,coordinate=%s,ip=%s,device=%s,sex=%d,constellation=%d,blood=%d,address=%s,score=%d,gold=%d,group=%s,create_time=%s,referee=%d,deviation=%s,time_len=%d,location_id=%s]", res_id, user_id, coordinate, ip, device, sex, constellation, blood, address, score, gold, group, create_time, referee, deviation, time_len, location_id);
   }
 }

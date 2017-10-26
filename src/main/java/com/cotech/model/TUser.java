@@ -6,12 +6,14 @@ public class TUser implements Serializable {
 
     private Long user_id;
     private String username;
+    private String password;
     private String uname;
     private String ip;
     private String device;
     private Integer sex;
     private Integer star;
     private Integer constellation;
+    private Integer blood;
     private String address;
     private Long score;
     private Long gold;
@@ -19,6 +21,7 @@ public class TUser implements Serializable {
     private Integer star_a;
     private Integer star_b;
     private Integer star_c;
+    private Integer star_d;
     private Integer star_e;
     private Integer star_f;
     private String create_time;
@@ -192,5 +195,34 @@ public class TUser implements Serializable {
 
     public void setApprover(Long approver) {
         this.approver = approver;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String passoword) {
+        this.password = passoword;
+    }
+
+    public Integer getBlood() {
+        return blood;
+    }
+
+    public void setBlood(Integer blood) {
+        this.blood = blood;
+    }
+
+    public Integer getStar_d() {
+        return star_d;
+    }
+
+    public void setStar_d(Integer star_d) {
+        this.star_d = star_d;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("入参为:[user_id=%d,username=%s,password=%s,uname=%s,ip=%s,device=%s,sex=%d,constellation=%d,blood=%d,address=%s,score=%d,gold=%d,group=%s,star_a=%d,star_b=%d,star_c=%d,star_d=%d,star_e=%d,star_f=%d,create_time=%s,approve_time=%s,status=%d,approver=%d]", user_id, username, password, uname, ip, device, sex, constellation, blood, address, score, gold, group, star_a, star_b, star_c, star_d, star_e, star_f, create_time, approve_time, status, approver);
     }
 }

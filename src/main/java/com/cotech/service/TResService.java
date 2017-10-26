@@ -4,6 +4,8 @@ import com.cotech.dao.TResDao;
 import com.cotech.dao.TUserDao;
 import com.cotech.model.TRes;
 import com.cotech.model.TopTenList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,15 +16,22 @@ public class TResService {
     @Resource
     private TResDao TResDao;
 
-    public Long getResCount(){
-        return TResDao.getResCount();
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    public Long countResCount(){
+        return TResDao.countResCount();
     }
 
     public void saveGameMain(TRes res){
+        logger.debug("res参数"+res.toString());
         TResDao.saveGameMain(res);
     }
 
     public Long getResIdByLocationId(String location_id){
         return TResDao.getResIdByLocationId(location_id);
+    }
+    public void updateResDetail(TRes TRes){
+        logger.debug("res参数"+TRes.toString());
+        TResDao.updateResDetail(TRes);
     }
 }
