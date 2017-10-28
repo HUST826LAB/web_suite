@@ -3,6 +3,7 @@ package com.cotech.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cotech.enums.Status;
+import com.cotech.model.Circle;
 import com.cotech.model.TRes;
 import com.cotech.model.TUser;
 import com.cotech.service.GameService;
@@ -49,24 +50,29 @@ public class GameController {
     public MappingJacksonValue gameMainController(HttpServletRequest request,@RequestBody String param, @RequestParam(value = "callback", required = false) String callback) {
         logger.debug("gameMain接口收到来自" + request.getRemoteAddr() + "的请求！param="+param);
         JSONObject jsonObject = new JSONObject();
-        JSONObject paramJson = (JSONObject) JSON.parse(param);
         WrapJson.wrapJson(jsonObject, Status.ParamError.getMsg(),Status.ParamError.getCode(),null);
         TRes res = new TRes();
+        Circle circle = new Circle();
         try{
+            JSONObject paramJson = (JSONObject) JSON.parse(param);
+            circle.setCircle_r(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_r"))));
+            circle.setCircle_y(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_y"))));
+            circle.setCircle_x(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_x"))));
             res.setCoordinate(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("coordinate")));
             res.setTime_len(ParamCheck.paramNotZeroNotNull(Long.valueOf((String) paramJson.get("time_len"))));
-            res.setDeviation(gameService.circleGame(res.getCoordinate()));
-            res.setScore((long) Double.parseDouble(res.getDeviation())*100000);
-            res.setGold((long) Double.parseDouble(res.getDeviation())%10+10);
+            res.setDeviation(gameService.circleGame(res.getCoordinate(),circle));
+            res.setScore(Math.abs(1000-(long) Double.parseDouble(res.getDeviation())*10));
+            res.setGold((long) Double.parseDouble(res.getDeviation())/10+10);
             res.setDevice((String) paramJson.get("device"));
-            res.setIp((String) paramJson.get("ip"));
+            res.setIp(request.getRemoteAddr());
             res.setGroup((String) paramJson.get("group"));
             res.setCreate_time((new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()));
             res.setReferee(Long.valueOf((String) paramJson.get("referee")));
             res.setUser_id(Long.valueOf((String) paramJson.get("user_id")));
             res.setLocation_id(Hashing.md5().newHasher().putString(res.getCreate_time(), Charsets.UTF_8).hash().toString());
         }catch (Exception e){
-            logger.debug("参数校验出错！"+res.toString());
+            logger.debug("参数校验出错！"+res.toString()+circle.toString());
+            logger.debug("错误原因："+e.getMessage());
             return JsonUtil.getInstense().getJsonp(jsonObject,callback);
         }
         try{
@@ -109,9 +115,7 @@ public class GameController {
             WrapJson.wrapJson(jsonObject, Status.Logged.getMsg(),Status.Logged.getCode(),jsonObject1);
         }catch (Exception e){
             logger.debug("关联已注册用户失败"+e.getMessage());
-        }finally {
-            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
         }
+        return JsonUtil.getInstense().getJsonp(jsonObject,callback);
     }
-
 }

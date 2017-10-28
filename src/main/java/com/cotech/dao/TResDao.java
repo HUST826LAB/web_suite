@@ -13,6 +13,9 @@ public interface TResDao {
     @Select("SELECT count(*) FROM t_res")
     Long countResCount();
 
+    @Select("SELECT res_id,user_id,referee,score,gold,`group` FROM t_res WHERE res_id = #{res_id}")
+    TRes getResByID(Long res_id);
+
     @Insert("INSERT INTO t_res (coordinate,time_len,deviation,score,gold,device,ip,create_time,`group`,location_id)" +
             "VALUES (#{coordinate},#{time_len},#{deviation},#{score},#{gold},#{device},#{ip},#{create_time},#{group},#{location_id})")
     void saveGameMain(TRes tRes);

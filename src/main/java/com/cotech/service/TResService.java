@@ -27,6 +27,10 @@ public class TResService {
         TResDao.saveGameMain(res);
     }
 
+    public TRes getResByID(Long res_id){
+        return TResDao.getResByID(res_id);
+    }
+
     public Long getResIdByLocationId(String location_id){
         return TResDao.getResIdByLocationId(location_id);
     }

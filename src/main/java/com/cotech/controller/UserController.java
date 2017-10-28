@@ -1,7 +1,9 @@
 package com.cotech.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cotech.enums.Status;
+import com.cotech.model.TRes;
 import com.cotech.model.TUser;
 import com.cotech.model.TopTenList;
 import com.cotech.service.TResService;
@@ -13,14 +15,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -44,30 +44,45 @@ public class UserController {
     @ResponseBody
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "signUp")
-    public MappingJacksonValue indexController(HttpServletRequest request, @RequestParam(value="callback",required=false) String callback) {
-        logger.debug("注册接口收到来自"+request.getRemoteAddr()+"的请求！");
+    public MappingJacksonValue signUpController(@RequestBody String param, HttpServletRequest request, @RequestParam(value="callback",required=false) String callback) {
+        logger.debug("注册接口收到来自"+request.getRemoteAddr()+"的请求！"+param);
         JSONObject jsonObject = new JSONObject();
         WrapJson.wrapJson(jsonObject, Status.ParamError.getMsg(),Status.ParamError.getCode(),null);
         TUser user = new TUser();
+        TRes res = new TRes();
         try{
-            user.setUsername(ParamCheck.paramNotEmptyNotNull(request.getParameter("username")));
+            JSONObject paramJson = (JSONObject) JSON.parse(param);
+            user.setUsername(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("username")));
             int flag = TUserService.countUsernameByUsername(user.getUsername());
-            if (flag == 0)
-                throw new Exception("参数错误");
+            if (flag > 0)
+                throw new Exception("用户名已被注册");
             //必须玩过游戏的才允许注册
-            String res_id = request.getParameter("res_id");
-            user.setPassword(ParamCheck.paramNotEmptyNotNull(request.getParameter("password")));
-            user.setIp(request.getParameter("ip"));
-            user.setDevice(request.getParameter("device"));
+            String res_id = ParamCheck.paramNotEmptyNotNull((String) paramJson.get("res_id"));
+            res = TResService.getResByID(Long.valueOf(res_id));
+            ParamCheck.paramIsZeroNotNull(res.getUser_id());
+            user.setScore(res.getScore());
+            user.setGold(res.getGold());
+            user.setGroup(res.getGroup());
+            user.setPassword(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("password")));
+            user.setIp(request.getRemoteAddr());
+            user.setDevice((String) paramJson.get("device"));
             user.setCreate_time((new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()));
             user.setStatus(0);
+            TUserService.saveUserSignUp(user);
         }catch (Exception e){
-            logger.debug("参数校验错误"+user.toString());
+            logger.debug("参数校验错误"+user.toString()+e.getMessage()+"\n"+res.toString());
         }
+        WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),null);
         try{
-
+            ParamCheck.paramNotZeroNotNull(res.getReferee());
+            int flag = TUserService.countUserCountById(res.getReferee());
+            if (flag == 0)
+                throw new Exception("推荐人不存在");
+            user = TUserService.getUserScoreAndGoldByID(res.getReferee());
+            user.setGold(user.getGold()+50l);
+            TUserService.updateGoldAndScoreById(user);
         }catch (Exception e){
-
+            logger.debug("没有推荐人"+res.toString()+e.getMessage());
         }
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }

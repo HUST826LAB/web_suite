@@ -42,4 +42,8 @@ public class TUserService {
     public Integer countUsernameByUsername(String username){
         return TUserDao.countUsernameByUsername(username);
     }
+
+    public void saveUserSignUp(TUser user){
+        TUserDao.saveUserSignUp(user);
+    }
 }

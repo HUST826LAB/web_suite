@@ -1,6 +1,8 @@
 package com.cotech.model;
 
-public class TRes {
+import java.io.Serializable;
+
+public class TRes implements Serializable {
   private Long res_id;
   private Long user_id;
   private String coordinate;

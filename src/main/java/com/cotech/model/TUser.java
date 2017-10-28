@@ -225,4 +225,5 @@ public class TUser implements Serializable {
     public String toString(){
         return String.format("入参为:[user_id=%d,username=%s,password=%s,uname=%s,ip=%s,device=%s,sex=%d,constellation=%d,blood=%d,address=%s,score=%d,gold=%d,group=%s,star_a=%d,star_b=%d,star_c=%d,star_d=%d,star_e=%d,star_f=%d,create_time=%s,approve_time=%s,status=%d,approver=%d]", user_id, username, password, uname, ip, device, sex, constellation, blood, address, score, gold, group, star_a, star_b, star_c, star_d, star_e, star_f, create_time, approve_time, status, approver);
     }
+
 }
