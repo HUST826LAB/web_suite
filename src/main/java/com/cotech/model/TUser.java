@@ -28,6 +28,7 @@ public class TUser implements Serializable {
     private String approve_time;
     private Integer status;
     private Long approver;
+    private String location_id;
 
     public Long getUser_id() {
         return user_id;
@@ -219,6 +220,14 @@ public class TUser implements Serializable {
 
     public void setStar_d(Integer star_d) {
         this.star_d = star_d;
+    }
+
+    public String getLocation_id() {
+        return location_id;
+    }
+
+    public void setLocation_id(String location_id) {
+        this.location_id = location_id;
     }
 
     @Override

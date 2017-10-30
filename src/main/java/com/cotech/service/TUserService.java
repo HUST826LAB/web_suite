@@ -46,4 +46,13 @@ public class TUserService {
     public void saveUserSignUp(TUser user){
         TUserDao.saveUserSignUp(user);
     }
+
+    public Long getUserIdByLocation(String location_id){
+        return TUserDao.getUserIdByLocation(location_id);
+    }
+
+    public void deleteUserById(Long user_id){
+        TUserDao.deleteUserById(user_id);
+    }
+
 }

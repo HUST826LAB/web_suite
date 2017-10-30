@@ -23,6 +23,9 @@ public interface TResDao {
     @Update("UPDATE t_res SET user_id=#{user_id},constellation=#{constellation},blood=#{blood},address=#{address},sex=#{sex} WHERE res_id = #{res_id}")
     void updateResDetail(TRes tRes);
 
+    @Update("UPDATE t_res SET user_id=#{user_id} where res_id=#{res_id}")
+    void updateResUserId(TRes res);
+
     @Select("SELECT res_id FROM t_res WHERE location_id = #{location_id} LIMIT 1")
     Long getResIdByLocationId(String location_id);
 }

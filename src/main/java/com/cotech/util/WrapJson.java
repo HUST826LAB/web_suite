@@ -2,10 +2,9 @@ package com.cotech.util;
 
 import com.alibaba.fastjson.JSONObject;
 
-public class WrapJson {
+public final class WrapJson {
 
-    private WrapJson() {
-    }
+    private WrapJson() {}
 
     public static void wrapJson(JSONObject jsonObject, String msg, int code, JSONObject data){
         jsonObject.put("msg",msg);

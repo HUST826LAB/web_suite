@@ -38,4 +38,8 @@ public class TResService {
         logger.debug("res参数"+TRes.toString());
         TResDao.updateResDetail(TRes);
     }
+
+    public void updateResUserId(TRes res){
+        TResDao.updateResUserId(res);
+    }
 }

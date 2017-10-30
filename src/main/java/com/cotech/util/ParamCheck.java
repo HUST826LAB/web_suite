@@ -2,7 +2,9 @@ package com.cotech.util;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class ParamCheck {
+public final class ParamCheck {
+
+    private ParamCheck(){}
 
     public static String paramNotEmptyNotNull(String param) throws Exception {
         checkNotNull(param);

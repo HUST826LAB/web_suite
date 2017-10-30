@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class GameService {
 
-    public String circleGame(String coordinate, Circle circle) {
+    public String circleGame(String coordinate, Circle circle) throws Exception {
         String[] params = coordinate.split(",");
+        if (params.length<100)
+            throw new Exception("点数不够");
         double x = circle.getCircle_x();
         double y = circle.getCircle_y();
         double r = circle.getCircle_r();

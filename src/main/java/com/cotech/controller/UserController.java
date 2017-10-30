@@ -11,6 +11,8 @@ import com.cotech.service.TUserService;
 import com.cotech.util.JsonUtil;
 import com.cotech.util.ParamCheck;
 import com.cotech.util.WrapJson;
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -68,9 +70,20 @@ public class UserController {
             user.setDevice((String) paramJson.get("device"));
             user.setCreate_time((new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()));
             user.setStatus(0);
+            user.setLocation_id(Hashing.md5().newHasher().putString(user.getCreate_time(), Charsets.UTF_8).hash().toString());
             TUserService.saveUserSignUp(user);
         }catch (Exception e){
             logger.debug("参数校验错误"+user.toString()+e.getMessage()+"\n"+res.toString());
+        }
+        try {
+            res.setUser_id(TUserService.getUserIdByLocation(user.getLocation_id()));
+            TResService.updateResUserId(res);
+        }catch (Exception e){
+            logger.debug("锁定成绩表失败,删除记录:"+e.getMessage());
+            try{TUserService.deleteUserById(res.getUser_id());}
+            catch (Exception e1){
+                logger.warn("锁定成绩表失败后删除记录失败："+e1.getMessage()+"\nuser_id："+res.getUser_id());
+            }
         }
         WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),null);
         try{

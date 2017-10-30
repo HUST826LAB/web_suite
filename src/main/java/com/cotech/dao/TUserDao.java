@@ -2,6 +2,7 @@ package com.cotech.dao;
 
 import com.cotech.model.TUser;
 import com.cotech.model.TopTenList;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -33,7 +34,13 @@ public interface TUserDao {
     @Select("SELECT count (*) FROM t_user WHERE username = #{username} AND status!=0")
     Integer countUsernameByUsername(String username);
 
-    @Insert("INSERT INTO t_user (score,gold,`group`,username,password,ip,device,create_time,status)" +
-            "VALUES (#{score},#{gold},#{group},#{username},#{password},#{ip},#{device},#{create_time},#{status})")
+    @Insert("INSERT INTO t_user (score,gold,`group`,username,password,ip,device,create_time,status,location_id)" +
+            "VALUES (#{score},#{gold},#{group},#{username},#{password},#{ip},#{device},#{create_time},#{status},#{location_id})")
     void saveUserSignUp(TUser user);
+
+    @Select("SELECT user_id FROM t_user where location_id=#{location_id}")
+    Long getUserIdByLocation(String location_id);
+
+    @Delete("DELETE FROM t_user WHERE user_id = #{user_id}")
+    void deleteUserById(Long user_id);
 }

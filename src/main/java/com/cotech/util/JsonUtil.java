@@ -5,7 +5,7 @@ import org.springframework.http.converter.json.MappingJacksonValue;
 
 import java.util.List;
 
-public class JsonUtil {
+public final class JsonUtil {
 
     private JsonUtil(){}
 
