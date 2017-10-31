@@ -7,7 +7,7 @@ public class TopTenList implements Serializable {
     private String username;
     private String uname;
     private Integer score;
-    private Integer gold;
+    private String name;
 
     public String getUsername() {
         return username;
@@ -33,12 +33,11 @@ public class TopTenList implements Serializable {
         this.score = score;
     }
 
-    public Integer getGold() {
-        return gold;
+    public String getName() {
+        return name;
     }
 
-    public void setGold(Integer gold) {
-        this.gold = gold;
+    public void setName(String name) {
+        this.name = name;
     }
-
 }

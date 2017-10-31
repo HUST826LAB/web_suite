@@ -6,54 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a20a3c11-459a-43df-a796-a7bfdb924f70" name="Default" comment="修改参数，增加锁定成绩表逻辑">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/dao/TGroupDao.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/model/TGroup.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/service/TGroupService.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_17.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_7_5.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite.war" afterPath="$PROJECT_DIR$/target/826_webSuite.war" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/aspect/LoggerAspect.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/aspect/LoggerAspect.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/controller/GameController.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/controller/GameController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/controller/UserController.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/dao/TResDao.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/dao/TResDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/dao/TUserDao.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/dao/TUserDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/enums/Status.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/enums/Status.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/model/TUser.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/model/TUser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/service/GameService.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/service/GameService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/service/TResService.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/service/TResService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/service/TUserService.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/service/TUserService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/util/JsonUtil.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/util/JsonUtil.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/util/ParamCheck.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/util/ParamCheck.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/util/WrapJson.class" afterPath="$PROJECT_DIR$/target/826_webSuite/WEB-INF/classes/com/cotech/util/WrapJson.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/aspect/LoggerAspect.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/aspect/LoggerAspect.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/controller/GameController.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/controller/GameController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/controller/UserController.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/controller/UserController.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/dao/TResDao.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/dao/TResDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/dao/TUserDao.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/dao/TUserDao.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/enums/Status.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/enums/Status.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/model/TUser.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/model/TUser.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/service/GameService.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/service/GameService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/service/TResService.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/service/TResService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/service/TUserService.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/service/TUserService.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/util/JsonUtil.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/util/JsonUtil.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/util/ParamCheck.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/util/ParamCheck.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/util/WrapJson.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/util/WrapJson.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/Test.class" afterPath="$PROJECT_DIR$/target/test-classes/Test.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/826_webSuite_war_exploded.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/826_webSuite_war_exploded.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/fea838de-5ade-494d-8e7f-6170d18103ff.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/fea838de-5ade-494d-8e7f-6170d18103ff.xml" />
+    <list default="true" id="a20a3c11-459a-43df-a796-a7bfdb924f70" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/826_webSuite.iml" afterPath="$PROJECT_DIR$/826_webSuite.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/controller/GameController.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/controller/GameController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/controller/IndexController.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/controller/IndexController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/controller/UserController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/dao/TGroupDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/dao/TGroupDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/dao/TResDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/dao/TResDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/dao/TUserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/dao/TUserDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/enums/Status.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/enums/Status.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/service/GameService.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/service/GameService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/service/TUserService.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/service/TUserService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/Test.java" afterPath="$PROJECT_DIR$/src/test/Test.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/model/TopTenList.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/model/TopTenList.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/service/TGroupService.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/service/TGroupService.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -101,92 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TResService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/service/TResService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-              <folding>
-                <element signature="method#updateResDetail#0;class#TResService#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TResDao.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TResDao.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/dao/TResDao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TGroup.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/model/TGroup.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-              <folding>
-                <element signature="e#303#304#0" expanded="true" />
-                <element signature="e#328#329#0" expanded="true" />
-                <element signature="e#372#373#0" expanded="true" />
-                <element signature="e#406#407#0" expanded="true" />
-                <element signature="e#435#436#0" expanded="true" />
-                <element signature="e#458#459#0" expanded="true" />
-                <element signature="e#498#499#0" expanded="true" />
-                <element signature="e#528#529#0" expanded="true" />
-                <element signature="e#557#558#0" expanded="true" />
-                <element signature="e#578#579#0" expanded="true" />
-                <element signature="e#616#617#0" expanded="true" />
-                <element signature="e#642#643#0" expanded="true" />
-                <element signature="e#672#673#0" expanded="true" />
-                <element signature="e#694#695#0" expanded="true" />
-                <element signature="e#734#735#0" expanded="true" />
-                <element signature="e#762#763#0" expanded="true" />
-                <element signature="e#790#791#0" expanded="true" />
-                <element signature="e#812#813#0" expanded="true" />
-                <element signature="e#850#851#0" expanded="true" />
-                <element signature="e#878#879#0" expanded="true" />
-                <element signature="e#908#909#0" expanded="true" />
-                <element signature="e#932#933#0" expanded="true" />
-                <element signature="e#974#975#0" expanded="true" />
-                <element signature="e#1006#1007#0" expanded="true" />
-                <element signature="e#1042#1043#0" expanded="true" />
-                <element signature="e#1070#1071#0" expanded="true" />
-                <element signature="e#1122#1123#0" expanded="true" />
-                <element signature="e#1162#1163#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TRes.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/model/TRes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="448">
-              <caret line="161" column="31" lean-forward="false" selection-start-line="161" selection-start-column="26" selection-end-line="161" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IndexController.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/controller/IndexController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="65" column="52" lean-forward="true" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TGroupService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/service/TGroupService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="308">
-              <caret line="22" column="47" lean-forward="false" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
+            <state relative-caret-position="196">
+              <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -225,7 +103,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/cotech/model/TopTenList.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cotech/model/T_res.java" />
         <option value="$PROJECT_DIR$/src/main/resources/logback.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/application_config.xml" />
@@ -244,13 +121,14 @@
         <option value="$PROJECT_DIR$/src/main/java/com/cotech/service/GameService.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cotech/controller/GameController.java" />
         <option value="$PROJECT_DIR$/src/test/Test.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/cotech/dao/TResDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cotech/model/TGroup.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/cotech/dao/TGroupDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cotech/dao/TUserDao.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cotech/service/TUserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/cotech/service/TGroupService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cotech/model/TopTenList.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/cotech/controller/IndexController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cotech/service/TGroupService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cotech/dao/TGroupDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/cotech/dao/TResDao.java" />
       </list>
     </option>
   </component>
@@ -360,7 +238,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="cotech" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="826_webSuite" type="b2602c69:ProjectViewProjectNode" />
@@ -624,7 +502,7 @@
       <workItem from="1508892938038" duration="20792000" />
       <workItem from="1508983725148" duration="34399000" />
       <workItem from="1509175789883" duration="3786000" />
-      <workItem from="1509331494629" duration="16507000" />
+      <workItem from="1509331494629" duration="18834000" />
     </task>
     <task id="LOCAL-00001" summary="增加autoReconnect=true">
       <created>1508768063850</created>
@@ -675,11 +553,18 @@
       <option name="project" value="LOCAL" />
       <updated>1509337622201</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="修改主页group接口">
+      <created>1509429501572</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1509429501572</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91316000" />
+    <option name="totallyTimeSpent" value="93643000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1456" height="876" extended-state="6" />
@@ -753,7 +638,8 @@
     <MESSAGE value="联调gameMain结束" />
     <MESSAGE value="注册接口完成" />
     <MESSAGE value="修改参数，增加锁定成绩表逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改参数，增加锁定成绩表逻辑" />
+    <MESSAGE value="修改主页group接口" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改主页group接口" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1099,30 +985,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/controller/GameController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/service/TUserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="82" column="33" lean-forward="false" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
+        <state relative-caret-position="28">
+          <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
           <folding>
-            <element signature="e#1279#1292#0" expanded="false" />
+            <element signature="method#updateGoldAndScoreById#0;class#TUserService#0" expanded="false" />
+            <element signature="e#1097#1098#0" expanded="true" />
+            <element signature="e#1162#1163#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/service/TResService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/dao/TUserDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        <state relative-caret-position="224">
+          <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/dao/TGroupDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
           <folding>
-            <element signature="method#updateResDetail#0;class#TResService#0" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/dao/TResDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/service/TGroupService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="280">
+          <caret line="22" column="30" lean-forward="false" selection-start-line="22" selection-start-column="30" selection-end-line="22" selection-end-column="30" />
+          <folding>
+            <element signature="e#568#569#0" expanded="true" />
+            <element signature="e#622#623#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/model/TopTenList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="35" column="29" lean-forward="false" selection-start-line="35" selection-start-column="29" selection-end-line="35" selection-end-column="29" />
+          <folding>
+            <element signature="e#469#470#0" expanded="true" />
+            <element signature="e#503#504#0" expanded="true" />
+            <element signature="e#699#700#0" expanded="true" />
+            <element signature="e#739#740#0" expanded="true" />
+            <element signature="e#771#772#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/controller/IndexController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="57" column="45" lean-forward="false" selection-start-line="57" selection-start-column="45" selection-end-line="57" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1137,8 +1058,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/model/TGroup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
+        <state relative-caret-position="140">
+          <caret line="5" column="24" lean-forward="true" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
           <folding>
             <element signature="e#303#304#0" expanded="true" />
             <element signature="e#328#329#0" expanded="true" />
@@ -1172,57 +1093,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/model/TopTenList.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/service/TResService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="23" column="31" lean-forward="false" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
+        <state relative-caret-position="196">
+          <caret line="26" column="21" lean-forward="false" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
           <folding>
-            <element signature="e#470#471#0" expanded="true" />
-            <element signature="e#504#505#0" expanded="true" />
+            <element signature="method#updateResDetail#0;class#TResService#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/service/TGroupService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/controller/GameController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="22" column="47" lean-forward="false" selection-start-line="22" selection-start-column="47" selection-end-line="22" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/dao/TGroupDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="9" column="12" lean-forward="false" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/service/TUserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28">
-          <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+        <state relative-caret-position="222">
+          <caret line="82" column="33" lean-forward="false" selection-start-line="82" selection-start-column="33" selection-end-line="82" selection-end-column="33" />
           <folding>
-            <element signature="method#updateGoldAndScoreById#0;class#TUserService#0" expanded="false" />
-            <element signature="e#1097#1098#0" expanded="true" />
-            <element signature="e#1162#1163#0" expanded="true" />
+            <element signature="e#1279#1292#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/dao/TUserDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/dao/TResDao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="22" column="40" lean-forward="false" selection-start-line="22" selection-start-column="21" selection-end-line="22" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/cotech/controller/IndexController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="65" column="52" lean-forward="true" selection-start-line="65" selection-start-column="52" selection-end-line="65" selection-end-column="52" />
+        <state relative-caret-position="196">
+          <caret line="19" column="25" lean-forward="false" selection-start-line="19" selection-start-column="25" selection-end-line="19" selection-end-column="25" />
           <folding />
         </state>
       </provider>

@@ -16,7 +16,7 @@ public interface TResDao {
     @Select("SELECT res_id,user_id,referee,score,gold,`group` FROM t_res WHERE res_id = #{res_id}")
     TRes getResByID(Long res_id);
 
-    @Insert("INSERT INTO t_res (coordinate,time_len,deviation,score,gold,device,ip,create_time,`group`,location_id,  )" +
+    @Insert("INSERT INTO t_res (coordinate,time_len,deviation,score,gold,device,ip,create_time,`group`,location_id,referee)" +
             "VALUES (#{coordinate},#{time_len},#{deviation},#{score},#{gold},#{device},#{ip},#{create_time},#{group},#{location_id},#{referee})")
     void saveGameMain(TRes tRes);
 

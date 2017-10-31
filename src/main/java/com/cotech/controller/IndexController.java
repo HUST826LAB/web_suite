@@ -48,7 +48,7 @@ public class IndexController {
     public MappingJacksonValue indexController(HttpServletRequest request, @RequestParam(value="callback",required=false) String callback) {
         logger.debug("index接口收到来自"+request.getRemoteAddr()+"的请求！");
         //金币榜
-        List<TGroup> groupLst = null;
+        List<TopTenList> groupLst = null;
         //分数榜
         List<TopTenList> scoreLst = null;
         //参与人数

@@ -19,7 +19,7 @@ public class TGroupService {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public List<TGroup> selectGroupTopThree(){
+    public List<TopTenList> selectGroupTopThree(){
         return TGroupDao.selectGroupTopThree();
     }
 
