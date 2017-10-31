@@ -5,7 +5,8 @@ public enum Status {
     Fail("失败",1),
     Error("服务器出现异常",-1),
     ParamError("参数错误",1),
-    Logged("已登录状态",2);
+    Logged("已登录状态",2),
+    NotCircle("不是圆",3);
 
     private String msg;
     private int code;

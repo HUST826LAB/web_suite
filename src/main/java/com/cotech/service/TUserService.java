@@ -22,8 +22,8 @@ public class TUserService {
         return  TUserDao.selectGoldTopTen();
     }
 
-    public List<TopTenList> selectScoreTopTen(){
-        return  TUserDao.selectScoreTopTen();
+    public List<TopTenList> selectScoreTopThree(){
+        return  TUserDao.selectScoreTopThree();
     }
 
     public Integer countUserCountById(Long id){

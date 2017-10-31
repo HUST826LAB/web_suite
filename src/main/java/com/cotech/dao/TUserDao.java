@@ -19,8 +19,8 @@ public interface TUserDao {
     @Select("SELECT gold,username,uname FROM t_user WHERE status !=0 ORDER BY gold DESC LIMIT 10")
     List<TopTenList> selectGoldTopTen();
 
-    @Select("SELECT score,username,uname FROM t_user WHERE status !=0 ORDER BY score DESC LIMIT 10")
-    List<TopTenList> selectScoreTopTen();
+    @Select("SELECT score,username,uname FROM t_user WHERE status !=0 ORDER BY score DESC LIMIT 3")
+    List<TopTenList> selectScoreTopThree();
 
     @Select("SELECT COUNT(*) FROM t_user WHERE user_id = #{id} AND status!=0")
     Integer countUserCountById(Long id);
@@ -31,7 +31,7 @@ public interface TUserDao {
     @Update("UPDATE t_user SET gold = #{gold},score = #{score} WHERE user_id = #{user_id}")
     void updateGoldAndScoreById(TUser user);
 
-    @Select("SELECT count (*) FROM t_user WHERE username = #{username} AND status!=0")
+    @Select("SELECT COUNT(*) FROM t_user WHERE username = #{username} AND `status` !=0")
     Integer countUsernameByUsername(String username);
 
     @Insert("INSERT INTO t_user (score,gold,`group`,username,password,ip,device,create_time,status,location_id)" +

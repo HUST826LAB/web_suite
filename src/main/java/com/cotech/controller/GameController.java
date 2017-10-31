@@ -61,7 +61,7 @@ public class GameController {
             res.setCoordinate(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("coordinate")));
             res.setTime_len(ParamCheck.paramNotZeroNotNull(Long.valueOf((String) paramJson.get("time_len"))));
             res.setDeviation(gameService.circleGame(res.getCoordinate(),circle));
-            res.setScore(Math.abs(1000-(long) Double.parseDouble(res.getDeviation())*10));
+            res.setScore((long) Math.abs(1000-Double.parseDouble(res.getDeviation())*10));
             res.setGold((long) Double.parseDouble(res.getDeviation())/10+10);
             res.setDevice((String) paramJson.get("device"));
             res.setIp(request.getRemoteAddr());
@@ -70,7 +70,11 @@ public class GameController {
             res.setReferee(Long.valueOf((String) paramJson.get("referee")));
             res.setUser_id(Long.valueOf((String) paramJson.get("user_id")));
             res.setLocation_id(Hashing.md5().newHasher().putString(res.getCreate_time(), Charsets.UTF_8).hash().toString());
-        }catch (Exception e){
+        } catch (RuntimeException e){
+            logger.debug("不是圆");
+            WrapJson.wrapJson(jsonObject, Status.NotCircle.getMsg(),Status.NotCircle.getCode(),null);
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+        } catch (Exception e){
             logger.debug("参数校验出错！"+res.toString()+circle.toString());
             logger.debug("错误原因："+e.getMessage());
             return JsonUtil.getInstense().getJsonp(jsonObject,callback);

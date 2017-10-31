@@ -107,15 +107,17 @@ public class UserController {
         logger.debug("注册接口收到来自" + request.getRemoteAddr() + "的请求！");
         JSONObject jsonObject = new JSONObject();
         WrapJson.wrapJsonInString(jsonObject, Status.ParamError.getMsg(), Status.ParamError.getCode(), "该用户名已被注册!");
+        String username = "";
         try {
-            String username = ParamCheck.paramNotEmptyNotNull(request.getParameter("username"));
+            username = ParamCheck.paramNotEmptyNotNull(request.getParameter("username"));
             int flag = TUserService.countUsernameByUsername(username);
-            if (flag>0)
+            if (flag==0)
                 WrapJson.wrapJsonInString(jsonObject, Status.SUCCESS.getMsg(), Status.SUCCESS.getCode(), "该用户名可以使用!");
         }catch (Exception e){
-            logger.debug("参数错误");
+            logger.debug("参数错误"+username);
         }
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }
+
 
     }

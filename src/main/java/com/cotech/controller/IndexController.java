@@ -2,7 +2,9 @@ package com.cotech.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cotech.enums.Status;
+import com.cotech.model.TGroup;
 import com.cotech.model.TopTenList;
+import com.cotech.service.TGroupService;
 import com.cotech.service.TResService;
 import com.cotech.service.TUserService;
 import com.cotech.util.JsonUtil;
@@ -29,6 +31,9 @@ public class IndexController {
     @Resource
     private TResService TResService;
 
+    @Resource
+    private TGroupService TGroupService;
+
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
@@ -43,25 +48,25 @@ public class IndexController {
     public MappingJacksonValue indexController(HttpServletRequest request, @RequestParam(value="callback",required=false) String callback) {
         logger.debug("index接口收到来自"+request.getRemoteAddr()+"的请求！");
         //金币榜
-        List<TopTenList> goldLst = null;
+        List<TGroup> groupLst = null;
         //分数榜
         List<TopTenList> scoreLst = null;
         //参与人数
         Long resCount = 0l;
         JSONObject jsonObject = new JSONObject();
         try {
-            goldLst = TUserService.selectGoldTopTen();
-            scoreLst = TUserService.selectScoreTopTen();
+            groupLst = TGroupService.selectGroupTopThree();
+            scoreLst = TUserService.selectScoreTopThree();
             resCount = TResService.countResCount();
         }catch (Exception e){
             logger.error("index接口查询数据库出现问题:"+e.getMessage());
             WrapJson.wrapJson(jsonObject,Status.Error.getMsg(),Status.Error.getCode(),null);
         }
         JSONObject paramMap = new JSONObject();
-        if (goldLst.isEmpty()||scoreLst.isEmpty()){
+        if (groupLst.isEmpty()||scoreLst.isEmpty()){
             WrapJson.wrapJson(jsonObject,Status.Fail.getMsg(),Status.Fail.getCode(),paramMap);
         }else {
-            paramMap.put("gold",goldLst);
+            paramMap.put("group",groupLst);
             paramMap.put("score",scoreLst);
             paramMap.put("resCount",resCount);
             WrapJson.wrapJson(jsonObject,Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),paramMap);
