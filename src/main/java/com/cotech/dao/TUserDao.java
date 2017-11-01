@@ -43,4 +43,7 @@ public interface TUserDao {
 
     @Delete("DELETE FROM t_user WHERE user_id = #{user_id}")
     void deleteUserById(Long user_id);
+
+    @Select("SELECT user_id,`status` FROM t_user WHERE username=#{username} AND password=#{password} AND `status` !=0")
+    TUser countUserSignIn(TUser user);
 }

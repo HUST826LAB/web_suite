@@ -55,4 +55,7 @@ public class TUserService {
         TUserDao.deleteUserById(user_id);
     }
 
+    public TUser countUserSignIn(TUser user){
+        return TUserDao.countUserSignIn(user);
+    }
 }

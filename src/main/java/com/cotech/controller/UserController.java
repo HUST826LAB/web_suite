@@ -100,6 +100,12 @@ public class UserController {
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }
 
+    /**
+     * 检查用户名接口
+     * author:陈震威
+     * bug联系方式：zhenweichen.ron@foxmail.com
+     * 敬祝码祺
+     */
     @ResponseBody
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "checkUsername")
@@ -119,5 +125,34 @@ public class UserController {
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }
 
-
+    /**
+     * 登录接口
+     * author:陈震威
+     * bug联系方式：zhenweichen.ron@foxmail.com
+     * 敬祝码祺
+     */
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "signIn")
+    public MappingJacksonValue signInController(@RequestBody String param,@RequestParam(value="callback",required=false) String callback){
+        JSONObject jsonObject = new JSONObject();
+        TUser user = new TUser();
+        WrapJson.wrapJson(jsonObject, Status.Fail.getMsg(), Status.Fail.getCode(), null);
+        try{
+            JSONObject paramJson = (JSONObject) JSON.parse(param);
+            user.setUsername(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("username")));
+            user.setPassword(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("password")));
+            TUser flag = TUserService.countUserSignIn(user);
+            if (flag!=null) {
+                paramJson.clear();
+                paramJson.put("user_id",flag.getUser_id());
+                paramJson.put("status",flag.getStatus());
+                WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(), Status.SUCCESS.getCode(), paramJson);
+            }
+        }catch (Exception e){
+            logger.debug("参数错误param="+param+e.getMessage());
+        }
+        return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }
+
+}
