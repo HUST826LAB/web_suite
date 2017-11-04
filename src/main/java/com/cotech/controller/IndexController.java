@@ -9,6 +9,8 @@ import com.cotech.service.TResService;
 import com.cotech.service.TUserService;
 import com.cotech.util.JsonUtil;
 import com.cotech.util.WrapJson;
+import com.google.common.base.Charsets;
+import com.google.common.hash.Hashing;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -20,7 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class IndexController {
@@ -69,6 +74,7 @@ public class IndexController {
             paramMap.put("group",groupLst);
             paramMap.put("score",scoreLst);
             paramMap.put("resCount",resCount);
+            paramMap.put("cookie_id",Hashing.sha1().newHasher().putString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date())+ new Random().nextLong(), Charsets.UTF_8).hash().toString());
             WrapJson.wrapJson(jsonObject,Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),paramMap);
         }
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);

@@ -3,6 +3,7 @@ package com.cotech.service;
 import com.cotech.model.Circle;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,7 +34,7 @@ public class GameService {
                 quadrant.add("4");
         }
         if (quadrant.size()<4)
-            throw new RuntimeException("不是圆");
+            throw new SQLException("不是圆");
         double avg = s / (double) len * 2.0D;
         return String.valueOf(avg / r * 100.0D).substring(0, 5);
     }

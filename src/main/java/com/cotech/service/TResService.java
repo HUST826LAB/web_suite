@@ -22,6 +22,10 @@ public class TResService {
         return TResDao.countResCount();
     }
 
+    public Long countResCountGroup(TRes res){
+        return TResDao.countResCountGroup(res);
+    }
+
     public void saveGameMain(TRes res){
         logger.debug("res参数"+res.toString());
         TResDao.saveGameMain(res);
@@ -41,5 +45,13 @@ public class TResService {
 
     public void updateResUserId(TRes res){
         TResDao.updateResUserId(res);
+    }
+
+    public Long countSumGreaterScore(Long score){
+        return TResDao.countSumGreaterScore(score);
+    }
+
+    public Long conutSumGroupGreaterScore(TRes res){
+        return TResDao.conutSumGroupGreaterScore(res);
     }
 }

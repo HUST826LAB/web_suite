@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class TRes implements Serializable {
   private Long res_id;
   private Long user_id;
+  private String cookie_id;
   private String coordinate;
   private String ip;
   private String device;
@@ -14,7 +15,7 @@ public class TRes implements Serializable {
   private String address;
   private Long score;
   private Long gold;
-  private String group;
+  private Long group;
   private String create_time;
   private Long referee;
   private String deviation;
@@ -35,6 +36,14 @@ public class TRes implements Serializable {
 
   public void setUser_id(Long user_id) {
     this.user_id = user_id;
+  }
+
+  public String getCookie_id() {
+    return cookie_id;
+  }
+
+  public void setCookie_id(String cookie_id) {
+    this.cookie_id = cookie_id;
   }
 
   public String getCoordinate() {
@@ -109,11 +118,11 @@ public class TRes implements Serializable {
     this.gold = gold;
   }
 
-  public String getGroup() {
+  public Long getGroup() {
     return group;
   }
 
-  public void setGroup(String group) {
+  public void setGroup(Long group) {
     this.group = group;
   }
 

@@ -31,7 +31,7 @@ public interface TUserDao {
     @Update("UPDATE t_user SET gold = #{gold},score = #{score} WHERE user_id = #{user_id}")
     void updateGoldAndScoreById(TUser user);
 
-    @Select("SELECT COUNT(*) FROM t_user WHERE username = #{username} AND `status` !=0")
+    @Select("SELECT COUNT(*) FROM t_user WHERE username = #{username}")
     Integer countUsernameByUsername(String username);
 
     @Insert("INSERT INTO t_user (score,gold,`group`,username,password,ip,device,create_time,status,location_id)" +

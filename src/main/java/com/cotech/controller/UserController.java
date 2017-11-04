@@ -25,6 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class UserController {
@@ -66,14 +67,15 @@ public class UserController {
             user.setGold(res.getGold());
             user.setGroup(res.getGroup());
             user.setPassword(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("password")));
-            user.setIp(request.getRemoteAddr());
-            user.setDevice((String) paramJson.get("device"));
+            user.setIp(res.getIp());
+            user.setDevice(res.getDevice());
             user.setCreate_time((new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()));
             user.setStatus(0);
-            user.setLocation_id(Hashing.md5().newHasher().putString(user.getCreate_time(), Charsets.UTF_8).hash().toString());
+            user.setLocation_id(Hashing.md5().newHasher().putString(user.getCreate_time()+new Random().nextLong(), Charsets.UTF_8).hash().toString());
             TUserService.saveUserSignUp(user);
         }catch (Exception e){
             logger.debug("参数校验错误"+user.toString()+e.getMessage()+"\n"+res.toString());
+            return JsonUtil.getInstense().getJsonp(jsonObject, callback);
         }
         try {
             res.setUser_id(TUserService.getUserIdByLocation(user.getLocation_id()));
@@ -83,7 +85,9 @@ public class UserController {
             try{TUserService.deleteUserById(res.getUser_id());}
             catch (Exception e1){
                 logger.warn("锁定成绩表失败后删除记录失败："+e1.getMessage()+"\nuser_id："+res.getUser_id());
+                return JsonUtil.getInstense().getJsonp(jsonObject, callback);
             }
+            return JsonUtil.getInstense().getJsonp(jsonObject, callback);
         }
         WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),null);
         try{
@@ -126,7 +130,7 @@ public class UserController {
     }
 
     /**
-     * 登录接口
+     * 登录接口-
      * author:陈震威
      * bug联系方式：zhenweichen.ron@foxmail.com
      * 敬祝码祺

@@ -23,4 +23,9 @@ public class TGroupService {
         return TGroupDao.selectGroupTopThree();
     }
 
+    public String getGroupName(Long group_id){
+        return TGroupDao.getGroupName(group_id);
+    }
+
+
 }

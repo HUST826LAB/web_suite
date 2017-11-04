@@ -7,6 +7,7 @@ import com.cotech.model.Circle;
 import com.cotech.model.TRes;
 import com.cotech.model.TUser;
 import com.cotech.service.GameService;
+import com.cotech.service.TGroupService;
 import com.cotech.service.TResService;
 import com.cotech.service.TUserService;
 import com.cotech.util.JsonUtil;
@@ -23,8 +24,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 
 @Controller
@@ -35,6 +40,8 @@ public class GameController {
     private TResService TResService;
     @Resource
     private TUserService TUserService;
+    @Resource
+    private TGroupService TGroupService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -58,6 +65,7 @@ public class GameController {
             circle.setCircle_r(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_r"))));
             circle.setCircle_y(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_y"))));
             circle.setCircle_x(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_x"))));
+            res.setCookie_id(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("cookie_id")));
             res.setCoordinate(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("coordinate")));
             res.setTime_len(ParamCheck.paramNotZeroNotNull(Long.valueOf((String) paramJson.get("time_len"))));
             res.setDeviation(gameService.circleGame(res.getCoordinate(),circle));
@@ -65,12 +73,12 @@ public class GameController {
             res.setGold((long) Double.parseDouble(res.getDeviation())/10+10);
             res.setDevice((String) paramJson.get("device"));
             res.setIp(request.getRemoteAddr());
-            res.setGroup((String) paramJson.get("group"));
+            res.setGroup(Long.valueOf(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("group"))));
             res.setCreate_time((new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()));
-            res.setReferee(Long.valueOf((String) paramJson.get("referee")));
-            res.setUser_id(Long.valueOf((String) paramJson.get("user_id")));
-            res.setLocation_id(Hashing.md5().newHasher().putString(res.getCreate_time(), Charsets.UTF_8).hash().toString());
-        } catch (RuntimeException e){
+            res.setReferee(checkNotNull(Long.valueOf((String) paramJson.get("referee"))));
+            res.setUser_id(checkNotNull(Long.valueOf((String) paramJson.get("user_id"))));
+            res.setLocation_id(Hashing.md5().newHasher().putString(res.getCreate_time()+new Random().nextLong(), Charsets.UTF_8).hash().toString());
+        } catch (SQLException e){
             logger.debug("不是圆");
             WrapJson.wrapJson(jsonObject, Status.NotCircle.getMsg(),Status.NotCircle.getCode(),null);
             return JsonUtil.getInstense().getJsonp(jsonObject,callback);
@@ -92,6 +100,17 @@ public class GameController {
         jsonObject1.put("res_id",res.getRes_id());
         jsonObject1.put("score",res.getScore());
         jsonObject1.put("gold",res.getGold());
+        try{
+            jsonObject1.put("sum",TResService.countResCount());
+            jsonObject1.put("sum_level",TResService.countSumGreaterScore(res.getScore())+1);
+            if (res.getGroup()!=0) {
+                jsonObject1.put("group_name", TGroupService.getGroupName(res.getGroup()));
+                jsonObject1.put("sumGroup", TResService.countResCountGroup(res));
+                jsonObject1.put("group_level", TResService.conutSumGroupGreaterScore(res) + 1);
+            }
+        }catch (Exception e){
+            logger.debug("查询排名出错"+e.getMessage());
+        }
         WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),jsonObject1);
         if (res.getUser_id()==0)
             return JsonUtil.getInstense().getJsonp(jsonObject,callback);

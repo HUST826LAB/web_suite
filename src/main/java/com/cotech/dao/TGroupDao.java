@@ -11,4 +11,7 @@ public interface TGroupDao {
 
     @Select("SELECT score,name FROM t_group ORDER BY score DESC LIMIT 3")
     List<TopTenList> selectGroupTopThree();
+
+    @Select("SELECT name FROM t_group WHERE group_id = #{group_id}")
+    String getGroupName(Long group_id);
 }

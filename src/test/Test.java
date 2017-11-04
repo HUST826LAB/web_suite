@@ -3,6 +3,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.cotech.enums.Status;
 import com.cotech.model.Circle;
 import com.cotech.model.TRes;
+import com.cotech.service.GameService;
 import com.cotech.util.JsonUtil;
 import com.cotech.util.ParamCheck;
 import com.cotech.util.WrapJson;
@@ -11,31 +12,86 @@ import com.google.common.hash.Hashing;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class Test {
 
     public static void main(String[] args) {
-        String s = "{\"circle_x\":\"300\",\"circle_y\":\"400\",\"circle_r\":\"240\",\"coordinate\":\"270,152,298,152,316,152,326,152,340,152,348,154,358,156,366,160,370,166,382,172,390,184,394,190,404,196,410,204,416,212,420,218,426,224,428,228,430,230,432,234,432,236,432,240,432,242,434,244,440,248,450,256,460,262,466,266,472,266,476,268,478,272,480,274,484,274,484,278,492,290,500,302,512,318,524,336,528,346,534,362,538,372,540,378,542,388,542,400,542,406,542,412,542,414,542,418,542,420,542,424,542,430,540,438,536,454,532,462,528,470,520,486,512,500,496,516,484,530,470,544,456,556,444,566,430,580,418,592,404,604,392,614,386,618,376,624,364,628,360,628,354,630,336,630,318,628,298,622,270,612,258,606,242,598,234,592,226,584,220,572,214,560,208,546,202,526,194,506,186,486,180,462,178,442,172,424,170,410,164,384,162,368,158,352,156,336,156,318,156,302,156,284,160,270,166,258,174,246,184,240,186,236,194,230,196,228,202,226,216,216,222,214,230,212,244,202,250,200,258,194,264,188,266,188,270,184,270,182,270,178,270,176,270,172,270,170,270,166,270,162,270,160\",\"time_len\":\"2555\",\"device\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1\",\"referee\":\"54\",\"user_id\":\"0\",\"group\":\"1234\"}\n";
+//        Node a = new Node("A",null,null);
+//        Node b = new Node("B",null,null);
+//        Node c = new Node("C",null,null);
+//        Node d = new Node("D",null,null);
+//        Node e = new Node("E",null,null);
+//        Node f = new Node("F",null,null);
+//        Node g = new Node("G",null,null);
+//        Node h = new Node("H",null,null);
+//        Node i = new Node("I",null,null);
+//        Node j = new Node("J",null,null);
+//
+//        a.setLeft(b);
+//        b.setRight(c);
+//        c.setLeft(d);
+//        c.setRight(e);
+//        a.setRight(f);
+//        f.setLeft(g);
+//        g.setLeft(i);
+//        g.setRight(j);
+//        f.setRight(h);
+//
+//
+//        houxubianli(a);
+        String param = "{\"circle_x\":\"300\",\"circle_y\":\"400\",\"circle_r\":\"240\",\"coordinate\":\"362,222,370,222,390,228,404,230,430,244,456,260,474,280,494,302,506,316,530,354,540,374,550,394,552,412,558,426,562,444,564,466,564,482,564,492,558,510,554,516,542,528,534,534,522,540,510,542,494,548,474,558,456,564,430,570,402,574,368,576,334,576,304,576,276,568,250,560,224,548,200,536,180,524,162,512,146,496,128,478,126,474,114,460,106,434,106,422,106,410,112,392,120,378,136,360,146,344,158,330,170,314,182,304,188,302,202,292,208,286,226,276,232,274,238,270,244,270,252,264,256,260,258,258,262,258,264,258,268,258,268,254,270,254,272,254,276,252,278,252,278,250,282,250,284,248,286,248,290,246,292,242,300,234,314,226,320,222,324,222,326,218,330,218,336,218,344,218,356,222,366,222,384,230,392,232,396,234,398,234,398,236\",\"time_len\":\"2058\",\"device\":\"Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1\",\"referee\":\"0\",\"user_id\":\"0\",\"cookie_id\":\"ad09c90fa1a90634ad878e408411ec12c149f974\"}";
+        JSONObject jsonObject = new JSONObject();
+        WrapJson.wrapJson(jsonObject, Status.ParamError.getMsg(),Status.ParamError.getCode(),null);
         TRes res = new TRes();
         Circle circle = new Circle();
         try{
-            JSONObject paramJson = (JSONObject) JSON.parse(s);
+            JSONObject paramJson = (JSONObject) JSON.parse(param);
             circle.setCircle_r(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_r"))));
             circle.setCircle_y(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_y"))));
             circle.setCircle_x(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_x"))));
+            res.setCookie_id(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("cookie_id")));
             res.setCoordinate(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("coordinate")));
             res.setTime_len(ParamCheck.paramNotZeroNotNull(Long.valueOf((String) paramJson.get("time_len"))));
-            res.setDeviation("111");
+            res.setDeviation(new GameService().circleGame(res.getCoordinate(),circle));
             res.setScore((long) Math.abs(1000-Double.parseDouble(res.getDeviation())*10));
             res.setGold((long) Double.parseDouble(res.getDeviation())/10+10);
             res.setDevice((String) paramJson.get("device"));
-            res.setGroup((String) paramJson.get("group"));
+            res.setGroup(ParamCheck.paramIsZeroNotNull(Long.valueOf((String) paramJson.get("group"))));
             res.setCreate_time((new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()));
-            res.setReferee(Long.valueOf((String) paramJson.get("referee")));
-            res.setUser_id(Long.valueOf((String) paramJson.get("user_id")));
-            res.setLocation_id(Hashing.md5().newHasher().putString(res.getCreate_time(), Charsets.UTF_8).hash().toString());
+            res.setReferee(checkNotNull(Long.valueOf((String) paramJson.get("referee"))));
+            res.setUser_id(checkNotNull(Long.valueOf((String) paramJson.get("user_id"))));
+            res.setLocation_id(Hashing.md5().newHasher().putString(res.getCreate_time()+new Random().nextLong(), Charsets.UTF_8).hash().toString());
+        } catch (RuntimeException e){
+            System.out.println(e.getMessage());
         } catch (Exception e){
-            System.out.println(e.getMessage()+res.toString());
+            System.out.println(e.getMessage());
         }
+    }
+
+    public static void qianxubianli(Node current){
+        System.out.println(current.getName());
+        if(current.getLeft()!=null)
+            qianxubianli(current.getLeft());
+        if (current.getRight()!=null)
+            qianxubianli(current.getRight());
+    }
+
+    public static void zhongxubianli(Node current){
+        if(current.getLeft()!=null)
+            zhongxubianli(current.getLeft());
+        System.out.println(current.getName());
+        if (current.getRight()!=null)
+            zhongxubianli(current.getRight());
+    }
+
+    public static void houxubianli(Node current){
+        if(current.getLeft()!=null)
+            houxubianli(current.getLeft());
+        if (current.getRight()!=null)
+            houxubianli(current.getRight());
+        System.out.println(current.getName());
     }
 }

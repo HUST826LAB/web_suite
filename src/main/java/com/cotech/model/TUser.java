@@ -17,7 +17,7 @@ public class TUser implements Serializable {
     private String address;
     private Long score;
     private Long gold;
-    private String group;
+    private Long group;
     private Integer star_a;
     private Integer star_b;
     private Integer star_c;
@@ -118,11 +118,11 @@ public class TUser implements Serializable {
         this.gold = gold;
     }
 
-    public String getGroup() {
+    public Long getGroup() {
         return group;
     }
 
-    public void setGroup(String group) {
+    public void setGroup(Long group) {
         this.group = group;
     }
 
