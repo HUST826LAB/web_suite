@@ -69,7 +69,7 @@ public class UserController {
             user.setPassword(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("password")));
             user.setIp(res.getIp());
             user.setDevice(res.getDevice());
-            user.setCreate_time((new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()));
+            user.setCreate_time((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
             user.setStatus(0);
             user.setLocation_id(Hashing.md5().newHasher().putString(user.getCreate_time()+new Random().nextLong(), Charsets.UTF_8).hash().toString());
             TUserService.saveUserSignUp(user);

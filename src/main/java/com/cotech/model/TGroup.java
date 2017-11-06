@@ -3,19 +3,19 @@ package com.cotech.model;
 import java.io.Serializable;
 
 public class TGroup implements Serializable {
-  private Long group_id;
+  private String group_id;
   private Long numSum;
   private String name;
-  private String score;
+  private Long score;
   private Long owner;
   private Long creator;
   private String create_time;
 
-  public Long getGroup_id() {
+  public String getGroup_id() {
     return group_id;
   }
 
-  public void setGroup_id(Long group_id) {
+  public void setGroup_id(String group_id) {
     this.group_id = group_id;
   }
 
@@ -35,11 +35,11 @@ public class TGroup implements Serializable {
     this.name = name;
   }
 
-  public String getScore() {
+  public Long getScore() {
     return score;
   }
 
-  public void setScore(String score) {
+  public void setScore(Long score) {
     this.score = score;
   }
 
@@ -69,6 +69,6 @@ public class TGroup implements Serializable {
 
   @Override
   public String toString(){
-      return String.format("入参为:[group_id=%d,name=%s,score=%s,create_time=%s,owner=%d,creator=%d]", group_id, name, score, create_time, owner, creator);
+      return String.format("入参为:[group_id=%s,name=%s,score=%s,create_time=%s,owner=%d,creator=%d]", group_id, name, score, create_time, owner, creator);
   }
 }

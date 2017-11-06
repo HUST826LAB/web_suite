@@ -1,6 +1,8 @@
 package com.cotech.dao;
 
+import com.cotech.model.TGroup;
 import com.cotech.model.TopTenList;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +15,9 @@ public interface TGroupDao {
     List<TopTenList> selectGroupTopThree();
 
     @Select("SELECT name FROM t_group WHERE group_id = #{group_id}")
-    String getGroupName(Long group_id);
+    String getGroupName(String group_id);
+
+    @Insert("INSERT INTO t_group (group_id,name,score,numSum,create_time,owner,creator) VALUES" +
+            " (#{group_id},#{name},#{score},#{numSum},#{create_time},#{owner},#{creator})")
+    void saveGroup(TGroup group);
 }

@@ -74,7 +74,7 @@ public class IndexController {
             paramMap.put("group",groupLst);
             paramMap.put("score",scoreLst);
             paramMap.put("resCount",resCount);
-            paramMap.put("cookie_id",Hashing.sha1().newHasher().putString(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date())+ new Random().nextLong(), Charsets.UTF_8).hash().toString());
+            paramMap.put("cookie_id",Hashing.sha1().newHasher().putString(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date())+ new Random().nextLong(), Charsets.UTF_8).hash().toString());
             WrapJson.wrapJson(jsonObject,Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),paramMap);
         }
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);

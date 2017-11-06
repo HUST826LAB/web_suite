@@ -15,7 +15,7 @@ public class TRes implements Serializable {
   private String address;
   private Long score;
   private Long gold;
-  private Long group;
+  private String group;
   private String create_time;
   private Long referee;
   private String deviation;
@@ -118,11 +118,11 @@ public class TRes implements Serializable {
     this.gold = gold;
   }
 
-  public Long getGroup() {
+  public String getGroup() {
     return group;
   }
 
-  public void setGroup(Long group) {
+  public void setGroup(String group) {
     this.group = group;
   }
 

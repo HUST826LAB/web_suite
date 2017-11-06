@@ -73,8 +73,8 @@ public class GameController {
             res.setGold((long) Double.parseDouble(res.getDeviation())/10+10);
             res.setDevice((String) paramJson.get("device"));
             res.setIp(request.getRemoteAddr());
-            res.setGroup(Long.valueOf(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("group"))));
-            res.setCreate_time((new SimpleDateFormat("yyyy-MM-dd hh:mm:ss")).format(new Date()));
+            res.setGroup(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("group")));
+            res.setCreate_time((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
             res.setReferee(checkNotNull(Long.valueOf((String) paramJson.get("referee"))));
             res.setUser_id(checkNotNull(Long.valueOf((String) paramJson.get("user_id"))));
             res.setLocation_id(Hashing.md5().newHasher().putString(res.getCreate_time()+new Random().nextLong(), Charsets.UTF_8).hash().toString());
@@ -103,7 +103,7 @@ public class GameController {
         try{
             jsonObject1.put("sum",TResService.countResCount());
             jsonObject1.put("sum_level",TResService.countSumGreaterScore(res.getScore())+1);
-            if (res.getGroup()!=0) {
+            if ("0".equals(res.getGroup())) {
                 jsonObject1.put("group_name", TGroupService.getGroupName(res.getGroup()));
                 jsonObject1.put("sumGroup", TResService.countResCountGroup(res));
                 jsonObject1.put("group_level", TResService.conutSumGroupGreaterScore(res) + 1);
