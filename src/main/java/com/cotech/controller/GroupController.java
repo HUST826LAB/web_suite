@@ -3,10 +3,7 @@ package com.cotech.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cotech.enums.Status;
-import com.cotech.model.Circle;
 import com.cotech.model.TGroup;
-import com.cotech.model.TRes;
-import com.cotech.model.TUser;
 import com.cotech.service.TGroupService;
 import com.cotech.util.JsonUtil;
 import com.cotech.util.ParamCheck;
@@ -18,16 +15,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import sun.security.krb5.internal.PAData;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 
 @Controller
 public class GroupController {

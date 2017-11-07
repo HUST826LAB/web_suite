@@ -141,11 +141,13 @@ public class UserController {
     public MappingJacksonValue signInController(@RequestBody String param,@RequestParam(value="callback",required=false) String callback){
         JSONObject jsonObject = new JSONObject();
         TUser user = new TUser();
+        TRes res = new TRes();
         WrapJson.wrapJson(jsonObject, Status.Fail.getMsg(), Status.Fail.getCode(), null);
         try{
             JSONObject paramJson = (JSONObject) JSON.parse(param);
             user.setUsername(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("username")));
             user.setPassword(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("password")));
+            //登录流程
             TUser flag = TUserService.countUserSignIn(user);
             if (flag!=null) {
                 paramJson.clear();
@@ -153,8 +155,15 @@ public class UserController {
                 paramJson.put("status",flag.getStatus());
                 WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(), Status.SUCCESS.getCode(), paramJson);
             }
+            //登录成功，消费掉之前游戏的数据
+            Long res_id = Long.valueOf((String) paramJson.get("res_id"));
+            if (res_id > 0l){
+                res.setRes_id(res_id);
+                res.setUser_id(flag.getUser_id());
+                TResService.updateResUserId(res);
+            }
         }catch (Exception e){
-            logger.debug("参数错误param="+param+e.getMessage());
+            logger.debug("参数错误param="+param+e.getMessage()+"res_id:"+res.getRes_id());
         }
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }
