@@ -70,7 +70,7 @@ public class UserController {
             user.setIp(res.getIp());
             user.setDevice(res.getDevice());
             user.setCreate_time((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
-            user.setStatus(0);
+            user.setStatus(1);
             user.setLocation_id(Hashing.md5().newHasher().putString(user.getCreate_time()+new Random().nextLong(), Charsets.UTF_8).hash().toString());
             TUserService.saveUserSignUp(user);
         }catch (Exception e){
@@ -89,7 +89,10 @@ public class UserController {
             }
             return JsonUtil.getInstense().getJsonp(jsonObject, callback);
         }
-        WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),null);
+        JSONObject resJson = new JSONObject();
+        resJson.put("user_id",res.getUser_id());
+        resJson.put("username",user.getUsername());
+        WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),resJson);
         try{
             ParamCheck.paramNotZeroNotNull(res.getReferee());
             int flag = TUserService.countUserCountById(res.getReferee());
@@ -130,7 +133,7 @@ public class UserController {
     }
 
     /**
-     * 登录接口-
+     * 登录接口
      * author:陈震威
      * bug联系方式：zhenweichen.ron@foxmail.com
      * 敬祝码祺
@@ -148,7 +151,7 @@ public class UserController {
             user.setUsername(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("username")));
             user.setPassword(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("password")));
             //登录流程
-            TUser flag = TUserService.countUserSignIn(user);
+            TUser flag = TUserService.getUserSignIn(user);
             if (flag!=null) {
                 paramJson.clear();
                 paramJson.put("user_id",flag.getUser_id());
@@ -160,11 +163,22 @@ public class UserController {
             if (res_id > 0l){
                 res.setRes_id(res_id);
                 res.setUser_id(flag.getUser_id());
+                //锁定库存
                 TResService.updateResUserId(res);
+                res = TResService.getResByID(res_id);
+                //分数及金币处理
+                if(res.getScore()>flag.getScore())
+                    flag.setScore(res.getScore());
+                flag.setGold(flag.getGold()+res.getGold());
+                TUserService.updateGoldAndScoreById(flag);
             }
+
+
         }catch (Exception e){
             logger.debug("参数错误param="+param+e.getMessage()+"res_id:"+res.getRes_id());
         }
+
+
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }
 
