@@ -28,9 +28,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/classes/com/cotech/service/TUserService.class" afterPath="$PROJECT_DIR$/target/classes/com/cotech/service/TUserService.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/target/test-classes/Test.class" afterPath="$PROJECT_DIR$/target/test-classes/Test.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/aspect/LoggerAspect.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/aspect/LoggerAspect.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/controller/IndexController.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/controller/IndexController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/controller/UserController.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/controller/UserController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/Test.java" afterPath="$PROJECT_DIR$/src/test/Test.java" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -646,7 +643,7 @@
       <workItem from="1509860054459" duration="10744000" />
       <workItem from="1509934393610" duration="3956000" />
       <workItem from="1510025439171" duration="8881000" />
-      <workItem from="1510118118096" duration="3014000" />
+      <workItem from="1510118118096" duration="3079000" />
     </task>
     <task id="LOCAL-00001" summary="增加autoReconnect=true">
       <created>1508768063850</created>
@@ -746,11 +743,18 @@
       <option name="project" value="LOCAL" />
       <updated>1510036568909</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="fix some bugs">
+      <created>1510122112432</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1510122112432</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="155888000" />
+    <option name="totallyTimeSpent" value="155953000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-206" width="1936" height="1056" extended-state="6" />

@@ -1,4 +1,5 @@
-public class Liked {
+@SuppressWarnings("Duplicates")
+public class DLiked {
 
     private Node head = null;
 
@@ -13,6 +14,7 @@ public class Liked {
             len++;
         }else {
             tail.setRight(node);
+            node.setLeft(tail);
             tail=node;
             len++;
         }
@@ -25,6 +27,7 @@ public class Liked {
             len++;
         }else {
             node.setRight(head);
+            head.setLeft(node);
             head=node;
             len++;
         }
@@ -35,16 +38,29 @@ public class Liked {
     }
 
 
-    public void bianli(){
-        if (head==null){
-            System.out.println("链表为空");
-        }else{
-            System.out.println(head.getName());
+    public void bianLiHeadToTail(){
+        if (head != null) {
+            System.out.print(head.getName()+",");
             Node node = head;
             while (node.getRight()!=null){
                 node=node.getRight();
-                System.out.println(node.getName());
+                System.out.print(node.getName()+",");
             }
+        } else {
+            System.out.println("链表为空");
+        }
+    }
+
+    public void bianLiTailToHead(){
+        if (tail != null) {
+            System.out.print(tail.getName()+",");
+            Node node = tail;
+            while (node.getLeft()!=null){
+                node=node.getLeft();
+                System.out.print(node.getName()+",");
+            }
+        } else {
+            System.out.println("链表为空");
         }
     }
 
