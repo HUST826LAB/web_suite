@@ -182,4 +182,27 @@ public class UserController {
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }
 
+    /**
+     * 空间接口
+     * author:陈震威
+     * bug联系方式：zhenweichen.ron@foxmail.com
+     * 敬祝码祺
+     */
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "zone")
+    public MappingJacksonValue zoneController(@RequestBody String param,@RequestParam(value="callback",required=false) String callback){
+        JSONObject jsonObject = new JSONObject();
+        TUser user = new TUser();
+        TRes res = new TRes();
+        WrapJson.wrapJson(jsonObject, Status.Fail.getMsg(), Status.Fail.getCode(), null);
+        try{
+            JSONObject paramJson = (JSONObject) JSON.parse(param);
+
+        }catch (Exception e){
+            logger.debug("参数错误param="+param+e.getMessage()+"res_id:"+res.getRes_id());
+        }
+        return JsonUtil.getInstense().getJsonp(jsonObject, callback);
+    }
+
 }

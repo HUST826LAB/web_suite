@@ -66,6 +66,7 @@ public class IndexController {
         }catch (Exception e){
             logger.error("index接口查询数据库出现问题:"+e.getMessage());
             WrapJson.wrapJson(jsonObject,Status.Error.getMsg(),Status.Error.getCode(),null);
+            return JsonUtil.getInstense().getJsonp(jsonObject, callback);
         }
         JSONObject paramMap = new JSONObject();
         if (groupLst.isEmpty()||scoreLst.isEmpty()){
