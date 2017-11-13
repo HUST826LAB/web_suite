@@ -101,7 +101,7 @@ public class GameController {
         jsonObject1.put("score",res.getScore());
         jsonObject1.put("gold",res.getGold());
         try{
-            jsonObject1.put("sum",TResService.countResCount());
+            jsonObject1.put("sum",TResService.countResCountCookieId(res));
             jsonObject1.put("sum_level",TResService.countSumGreaterScore(res.getScore())+1);
             if ("0".equals(res.getGroup())) {
                 jsonObject1.put("group_name", TGroupService.getGroupName(res.getGroup()));
@@ -110,6 +110,8 @@ public class GameController {
             }
         }catch (Exception e){
             logger.debug("查询排名出错"+e.getMessage());
+            WrapJson.wrapJson(jsonObject, Status.Error.getMsg(),Status.Error.getCode(),jsonObject1);
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
         }
         WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),jsonObject1);
         if (res.getUser_id()==0)

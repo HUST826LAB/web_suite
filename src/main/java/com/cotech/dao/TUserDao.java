@@ -46,4 +46,9 @@ public interface TUserDao {
 
     @Select("SELECT user_id,`status`,username,score,gold FROM t_user WHERE username=#{username} AND password=#{password} AND `status` !=0")
     TUser getUserSignIn(TUser user);
+
+    @Select("SELECT `status`,username,uname,score,gold,`group` FROM t_user WHERE user_id=#{user_id} AND `status` !=0")
+    TUser getUserZone(TUser user);
+
+
 }

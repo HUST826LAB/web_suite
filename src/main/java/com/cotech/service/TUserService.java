@@ -58,4 +58,8 @@ public class TUserService {
     public TUser getUserSignIn(TUser user){
         return TUserDao.getUserSignIn(user);
     }
+
+    public TUser getUserZone(TUser user){
+        return TUserDao.getUserZone(user);
+    }
 }
