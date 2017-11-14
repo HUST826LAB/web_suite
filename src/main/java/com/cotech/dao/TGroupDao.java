@@ -1,5 +1,6 @@
 package com.cotech.dao;
 
+import com.cotech.model.PageVo;
 import com.cotech.model.TGroup;
 import com.cotech.model.TopTenList;
 import org.apache.ibatis.annotations.Insert;
@@ -13,6 +14,12 @@ public interface TGroupDao {
 
     @Select("SELECT score,name FROM t_group ORDER BY score DESC LIMIT 3")
     List<TopTenList> selectGroupTopThree();
+
+    @Select("SELECT group_id,score,name,numSum,owner,creator,create_time FROM t_group LIMIT #{current},#{pageLen}")
+    List<TGroup> selectGroupByPage(PageVo pageVo);
+
+    @Select("SELECT count(group_id) FROM t_group")
+    Long countGroup();
 
     @Select("SELECT name FROM t_group WHERE group_id = #{group_id}")
     String getGroupName(String group_id);

@@ -50,7 +50,8 @@ public class MineController {
     @ResponseBody
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "zone")
-    public MappingJacksonValue zoneController(@RequestBody String param,@RequestParam(value="callback",required=false) String callback){
+    public MappingJacksonValue zoneController(HttpServletRequest request,@RequestBody String param,@RequestParam(value="callback",required=false) String callback){
+        logger.debug("zone接口收到来自" + request.getRemoteAddr() + "的请求！param="+param);
         JSONObject jsonObject = new JSONObject();
         TUser user = new TUser();
         TRes res = new TRes();
@@ -77,7 +78,7 @@ public class MineController {
             }
             WrapJson.wrapJson(jsonObject,Status.SUCCESS.getMsg(), Status.SUCCESS.getCode(), resJson);
         }catch (Exception e){
-            logger.debug("参数错误param="+param+e.getMessage()+"res_id:"+res.getRes_id());
+            logger.debug("参数错误:"+e.getMessage()+"res_id:"+res.getRes_id());
         }
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }

@@ -20,6 +20,11 @@ public final class ParamCheck {
         return param;
     }
 
+    public static Long paramNotNull(Long param) throws Exception {
+        checkNotNull(param);
+        return param;
+    }
+
     public static Long paramIsZeroNotNull(Long param) throws Exception {
         checkNotNull(param);
         if (!param.equals(0l))

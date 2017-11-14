@@ -2,6 +2,7 @@ package com.cotech.service;
 
 import com.cotech.dao.TGroupDao;
 import com.cotech.dao.TUserDao;
+import com.cotech.model.PageVo;
 import com.cotech.model.TGroup;
 import com.cotech.model.TUser;
 import com.cotech.model.TopTenList;
@@ -30,5 +31,14 @@ public class TGroupService {
     public void saveGroup(TGroup group){
         TGroupDao.saveGroup(group);
     }
+
+    public List<TGroup> selectGroupByPage(PageVo pageVo){
+        return TGroupDao.selectGroupByPage(pageVo);
+    }
+
+    public Long countGroup(){
+        return TGroupDao.countGroup();
+    }
+
 
 }

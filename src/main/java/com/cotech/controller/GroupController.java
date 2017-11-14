@@ -3,6 +3,7 @@ package com.cotech.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cotech.enums.Status;
+import com.cotech.model.PageVo;
 import com.cotech.model.TGroup;
 import com.cotech.service.TGroupService;
 import com.cotech.util.JsonUtil;
@@ -20,6 +21,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 
@@ -54,6 +56,33 @@ public class GroupController {
             return JsonUtil.getInstense().getJsonp(jsonObject,callback);
         }
         WrapJson.wrapJsonInString(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),group.getGroup_id());
+        return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+    }
+
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "selectGroup")
+    public MappingJacksonValue selectGroupController(HttpServletRequest request, @RequestBody String param, @RequestParam(value = "callback", required = false) String callback) {
+        logger.debug("selectGroup接口收到来自" + request.getRemoteAddr() + "的请求！param="+param);
+        JSONObject jsonObject = new JSONObject();
+        TGroup group = new TGroup();
+        PageVo pageVo = new PageVo();
+        WrapJson.wrapJson(jsonObject, Status.ParamError.getMsg(),Status.ParamError.getCode(),null);
+        try{
+            JSONObject paramJson = (JSONObject) JSON.parse(param);
+            pageVo.setCurrent(ParamCheck.paramNotNull(paramJson.getLong("current")));
+            pageVo.setPageLen(ParamCheck.paramNotZeroNotNull(paramJson.getLong("pageLen")));
+            pageVo.setCurrent(pageVo.getCurrent()*pageVo.getPageLen());
+            List<TGroup> groupList = TGroupService.selectGroupByPage(pageVo);
+            Long sum = TGroupService.countGroup();
+            JSONObject resJson = new JSONObject();
+            resJson.put("group_lst",groupList);
+            resJson.put("sum",sum);
+            WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),resJson);
+        }catch (Exception e){
+            logger.debug("参数错误:"+e.getMessage()+","+group.toString());
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+        }
         return JsonUtil.getInstense().getJsonp(jsonObject,callback);
     }
 

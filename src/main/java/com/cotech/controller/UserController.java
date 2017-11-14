@@ -117,7 +117,7 @@ public class UserController {
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "checkUsername")
     public MappingJacksonValue checkUsername(HttpServletRequest request, @RequestParam(value="callback",required=false) String callback) {
-        logger.debug("注册接口收到来自" + request.getRemoteAddr() + "的请求！");
+        logger.debug("checkUsername接口收到来自" + request.getRemoteAddr() + "的请求！");
         JSONObject jsonObject = new JSONObject();
         WrapJson.wrapJsonInString(jsonObject, Status.ParamError.getMsg(), Status.ParamError.getCode(), "该用户名已被注册!");
         String username = "";
@@ -141,7 +141,8 @@ public class UserController {
     @ResponseBody
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "signIn")
-    public MappingJacksonValue signInController(@RequestBody String param,@RequestParam(value="callback",required=false) String callback){
+    public MappingJacksonValue signInController(HttpServletRequest request,@RequestBody String param,@RequestParam(value="callback",required=false) String callback){
+        logger.debug("signIn接口收到来自" + request.getRemoteAddr() + "的请求！param="+param);
         JSONObject jsonObject = new JSONObject();
         TUser user = new TUser();
         TRes res = new TRes();
@@ -175,7 +176,7 @@ public class UserController {
 
 
         }catch (Exception e){
-            logger.debug("参数错误param="+param+e.getMessage()+"res_id:"+res.getRes_id());
+            logger.debug("参数错误:"+e.getMessage()+"res_id:"+res.getRes_id());
         }
 
 
