@@ -70,7 +70,7 @@ public class GameController {
             res.setTime_len(ParamCheck.paramNotZeroNotNull(Long.valueOf((String) paramJson.get("time_len"))));
             res.setDeviation(gameService.circleGame(res.getCoordinate(),circle));
             res.setScore((long) Math.abs(1000-Double.parseDouble(res.getDeviation())*10));
-            res.setGold((long) Double.parseDouble(res.getDeviation())/10+10);
+            res.setGold(10 + res.getScore()/100);
             res.setDevice((String) paramJson.get("device"));
             res.setIp(request.getRemoteAddr());
             res.setGroup(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("group")));

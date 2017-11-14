@@ -69,12 +69,20 @@ public class MineController {
             //查询排名
             res.setGroup(user.getGroup());
             res.setScore(user.getScore());
-            resJson.put("sum",TResService.countResCountCookieId(res));
-            resJson.put("sum_level",TResService.countSumGreaterScore(user.getScore())+1);
+            long sum = TResService.countResCountCookieId(res);
+            long sumL = TResService.countSumGreaterScore(user.getScore());
+            if (sum != sumL)
+                sumL++;
+            resJson.put("sum",sum);
+            resJson.put("sum_level",sumL);
             if ("0".equals(user.getGroup())) {
+                sum = TResService.countResCountGroup(res);
+                sumL = TResService.conutSumGroupGreaterScore(res);
+                if (sum != sumL)
+                    sumL++;
                 resJson.put("group_name", TGroupService.getGroupName(user.getGroup()));
-                resJson.put("sumGroup", TResService.countResCountGroup(res));
-                resJson.put("group_level", TResService.conutSumGroupGreaterScore(res) + 1);
+                resJson.put("sumGroup", sum);
+                resJson.put("group_level", sumL);
             }
             WrapJson.wrapJson(jsonObject,Status.SUCCESS.getMsg(), Status.SUCCESS.getCode(), resJson);
         }catch (Exception e){
