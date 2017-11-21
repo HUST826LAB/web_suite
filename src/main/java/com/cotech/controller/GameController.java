@@ -62,14 +62,19 @@ public class GameController {
         Circle circle = new Circle();
         try{
             JSONObject paramJson = (JSONObject) JSON.parse(param);
-            circle.setCircle_r(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_r"))));
-            circle.setCircle_y(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_y"))));
-            circle.setCircle_x(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_x"))));
+            if(paramJson.containsKey("summit")){
+                res.setAddress("triangle:"+paramJson.getString("summit"));
+            }else if (paramJson.containsKey("circle_r")){
+                circle.setCircle_r(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_r"))));
+                circle.setCircle_y(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_y"))));
+                circle.setCircle_x(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_x"))));
+                res.setAddress(circle.toString());
+            }
             res.setCookie_id(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("cookie_id")));
             res.setCoordinate(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("coordinate")));
             res.setTime_len(ParamCheck.paramNotZeroNotNull(Long.valueOf((String) paramJson.get("time_len"))));
-            res.setDeviation(gameService.circleGame(res.getCoordinate(),circle));
-            res.setScore((long) Math.abs(1000-Double.parseDouble(res.getDeviation())*10));
+            res.setDeviation(ParamCheck.paramNotEmptyNotNull(paramJson.getString("deviation")));
+            res.setScore(ParamCheck.paramGreatThanZeroNotNull(paramJson.getLong("score")));
             res.setGold(10 + res.getScore()/100);
             res.setDevice((String) paramJson.get("device"));
             res.setIp(request.getRemoteAddr());
@@ -98,15 +103,24 @@ public class GameController {
         //检查是否登录，若登录增加金币更新分数和偏移率
         JSONObject jsonObject1 = new JSONObject();
         jsonObject1.put("res_id",res.getRes_id());
-        jsonObject1.put("score",res.getScore());
+//        jsonObject1.put("score",res.getScore());
         jsonObject1.put("gold",res.getGold());
         try{
-            jsonObject1.put("sum",TResService.countResCountCookieId(res));
-            jsonObject1.put("sum_level",TResService.countSumGreaterScore(res.getScore())+1);
-            if ("0".equals(res.getGroup())) {
+            long sum = TResService.countResCountCookieId(res);
+            long sumL = TResService.countSumGreaterScore(res.getScore());
+            if (sum != sumL)
+                sumL++;
+            jsonObject1.put("sum",sum);
+            jsonObject1.put("sum_level",sumL);
+            if (!"0".equals(res.getGroup())) {
+                sum = TResService.countResCountGroup(res);
+                sumL = TResService.countSumGroupGreaterScore(res);
+                if (sumL != sum) {
+                    sumL++;
+                }
                 jsonObject1.put("group_name", TGroupService.getGroupName(res.getGroup()));
-                jsonObject1.put("sumGroup", TResService.countResCountGroup(res));
-                jsonObject1.put("group_level", TResService.conutSumGroupGreaterScore(res) + 1);
+                jsonObject1.put("sumGroup", sum);
+                jsonObject1.put("group_level", sumL);
             }
         }catch (Exception e){
             logger.debug("查询排名出错"+e.getMessage());
@@ -126,7 +140,7 @@ public class GameController {
             user.setGold(gold+res.getGold());
             Long score = user.getScore();
             res.setUser_id(user.getUser_id());
-            res.setAddress(user.getAddress());
+//            res.setAddress(user.getAddress());
             res.setSex(user.getSex());
             res.setConstellation(user.getConstellation());
             res.setBlood(user.getBlood());

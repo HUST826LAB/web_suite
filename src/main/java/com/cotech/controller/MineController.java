@@ -75,9 +75,9 @@ public class MineController {
                 sumL++;
             resJson.put("sum",sum);
             resJson.put("sum_level",sumL);
-            if ("0".equals(user.getGroup())) {
+            if (!"0".equals(user.getGroup())) {
                 sum = TResService.countResCountGroup(res);
-                sumL = TResService.conutSumGroupGreaterScore(res);
+                sumL = TResService.countSumGroupGreaterScore(res);
                 if (sum != sumL)
                     sumL++;
                 resJson.put("group_name", TGroupService.getGroupName(user.getGroup()));

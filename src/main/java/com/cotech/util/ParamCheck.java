@@ -20,6 +20,14 @@ public final class ParamCheck {
         return param;
     }
 
+    public static Long paramGreatThanZeroNotNull(Long param) throws Exception {
+        checkNotNull(param);
+        if (param<0l) {
+            throw new Exception("成绩小于0");
+        }
+        return param;
+    }
+
     public static Long paramNotNull(Long param) throws Exception {
         checkNotNull(param);
         return param;

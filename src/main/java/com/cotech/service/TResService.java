@@ -51,8 +51,8 @@ public class TResService {
         return TResDao.countSumGreaterScore(score);
     }
 
-    public Long conutSumGroupGreaterScore(TRes res){
-        return TResDao.conutSumGroupGreaterScore(res);
+    public Long countSumGroupGreaterScore(TRes res){
+        return TResDao.countSumGroupGreaterScore(res);
     }
 
     public Long countResCountCookieId(TRes res){
