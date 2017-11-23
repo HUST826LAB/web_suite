@@ -40,5 +40,28 @@ public class TGroupService {
         return TGroupDao.countGroup();
     }
 
+    public Long countGroupName(TGroup group){
+        return TGroupDao.countGroupName(group);
+    }
+
+    public String getGroup_id(TGroup group){
+        return TGroupDao.getGroup_id(group);
+    }
+
+    public void deleteGroupByName(TGroup group){
+        TGroupDao.deleteGroupByName(group);
+    }
+
+    public TGroup getGroup(String group_id){
+        return TGroupDao.getGroup(group_id);
+    }
+    public void updateScoreById(TGroup group){
+        TGroupDao.updateScoreById(group);
+    }
+
+    public void updateNumById(TGroup group){
+        TGroupDao.updateNumById(group);
+    }
+
 
 }

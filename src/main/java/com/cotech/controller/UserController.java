@@ -3,9 +3,11 @@ package com.cotech.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cotech.enums.Status;
+import com.cotech.model.TGroup;
 import com.cotech.model.TRes;
 import com.cotech.model.TUser;
 import com.cotech.model.TopTenList;
+import com.cotech.service.TGroupService;
 import com.cotech.service.TResService;
 import com.cotech.service.TUserService;
 import com.cotech.util.JsonUtil;
@@ -35,6 +37,9 @@ public class UserController {
 
     @Resource
     private TResService TResService;
+
+    @Resource
+    private TGroupService TGroupService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -103,6 +108,16 @@ public class UserController {
             TUserService.updateGoldAndScoreById(user);
         }catch (Exception e){
             logger.debug("没有推荐人"+res.toString()+e.getMessage());
+        }
+        try{
+            ParamCheck.paramNotZeroNotNull(res.getGroup());
+            TGroup group = TGroupService.getGroup(res.getGroup());
+            group.setNumSum(group.getNumSum()+1);
+            group.setScore(user.getScore());
+            TGroupService.updateScoreById(group);
+            TGroupService.updateNumById(group);
+        }catch (Exception e){
+            logger.debug("没有组别"+res.toString()+e.getMessage());
         }
         return JsonUtil.getInstense().getJsonp(jsonObject, callback);
     }
@@ -173,8 +188,6 @@ public class UserController {
                 flag.setGold(flag.getGold()+res.getGold());
                 TUserService.updateGoldAndScoreById(flag);
             }
-
-
         }catch (Exception e){
             logger.debug("参数错误:"+e.getMessage()+"res_id:"+res.getRes_id());
         }

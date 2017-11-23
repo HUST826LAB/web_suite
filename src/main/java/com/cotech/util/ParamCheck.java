@@ -20,6 +20,13 @@ public final class ParamCheck {
         return param;
     }
 
+    public static String paramNotZeroNotNull(String param) throws Exception {
+        checkNotNull(param);
+        if (param.equals(0l))
+            throw new Exception("参数为0");
+        return param;
+    }
+
     public static Long paramGreatThanZeroNotNull(Long param) throws Exception {
         checkNotNull(param);
         if (param<0l) {

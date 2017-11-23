@@ -2,11 +2,12 @@ package com.cotech.enums;
 
 public enum Status {
     SUCCESS("成功",0),
-    Fail("失败",1),
+    Fail("失败",-3),
     Error("服务器出现异常",-1),
     ParamError("参数错误",1),
     Logged("已登录状态",2),
-    NotCircle("不是圆",3);
+    NotCircle("不是圆",3),
+    Exist("值已存在",-2),;
 
     private String msg;
     private int code;

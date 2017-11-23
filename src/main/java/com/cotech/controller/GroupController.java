@@ -50,9 +50,19 @@ public class GroupController {
             group.setOwner(ParamCheck.paramNotZeroNotNull(Long.valueOf((String) paramJson.get("user_id"))));
             group.setNumSum(0l);
             group.setScore(0l);
-            TGroupService.saveGroup(group);
         }catch (Exception e){
             logger.debug("参数错误:"+e.getMessage()+","+group.toString());
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+        }
+        try{
+            Long count = TGroupService.countGroupName(group);
+            if (count>0){
+                WrapJson.wrapJsonInString(jsonObject, Status.Exist.getMsg(),Status.Exist.getCode(),TGroupService.getGroup_id(group));
+                return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+            }else
+                TGroupService.saveGroup(group);
+        }catch (Exception e){
+            logger.debug("操作数据库失败:"+e.getMessage()+","+group.toString());
             return JsonUtil.getInstense().getJsonp(jsonObject,callback);
         }
         WrapJson.wrapJsonInString(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),group.getGroup_id());
@@ -77,6 +87,10 @@ public class GroupController {
             Long sum = TGroupService.countGroup();
             JSONObject resJson = new JSONObject();
             resJson.put("group_lst",groupList);
+            if (sum % pageVo.getPageLen() == 0)
+                sum = sum / pageVo.getPageLen();
+            else
+                sum = sum / pageVo.getPageLen() + 1;
             resJson.put("sum",sum);
             WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),resJson);
         }catch (Exception e){
@@ -86,5 +100,30 @@ public class GroupController {
         return JsonUtil.getInstense().getJsonp(jsonObject,callback);
     }
 
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "deleteGroup")
+    public MappingJacksonValue deleteGroupController(HttpServletRequest request, @RequestBody String param, @RequestParam(value = "callback", required = false) String callback) {
+        logger.debug("deleteGroup接口收到来自" + request.getRemoteAddr() + "的请求！param="+param);
+        JSONObject jsonObject = new JSONObject();
+        TGroup group = new TGroup();
+        WrapJson.wrapJson(jsonObject, Status.ParamError.getMsg(),Status.ParamError.getCode(),null);
+        try{
+            JSONObject paramJson = (JSONObject) JSON.parse(param);
+            group.setName(ParamCheck.paramNotEmptyNotNull((String) paramJson.get("name")));
+        }catch (Exception e){
+            logger.debug("参数错误:"+e.getMessage()+","+group.toString());
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+        }
+        try {
+            TGroupService.deleteGroupByName(group);
+        }catch (Exception e){
+            logger.debug("操作数据库错误:"+e.getMessage()+","+group.toString());
+            WrapJson.wrapJson(jsonObject, Status.Error.getMsg(),Status.Error.getCode(),null);
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+        }
+        WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),null);
+        return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+    }
 
 }

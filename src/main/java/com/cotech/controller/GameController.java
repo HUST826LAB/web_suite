@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cotech.enums.Status;
 import com.cotech.model.Circle;
+import com.cotech.model.TGroup;
 import com.cotech.model.TRes;
 import com.cotech.model.TUser;
 import com.cotech.service.GameService;
@@ -136,6 +137,7 @@ public class GameController {
             if (flag == 0)
                 return JsonUtil.getInstense().getJsonp(jsonObject, callback);
             TUser user = TUserService.getUserScoreAndGoldByID(user_id);
+            TGroup group = TGroupService.getGroup(user.getGroup());
             Long gold = user.getGold();
             user.setGold(gold+res.getGold());
             Long score = user.getScore();
@@ -147,8 +149,11 @@ public class GameController {
             //更新res表
             TResService.updateResDetail(res);
             if ((score < res.getScore())) {
+                //修改分数
+                group.setScore(group.getScore()-score+res.getScore());
                 user.setScore(res.getScore());
             }
+            TGroupService.updateScoreById(group);
             TUserService.updateGoldAndScoreById(user);
             jsonObject1.remove("res_id");
             WrapJson.wrapJson(jsonObject, Status.Logged.getMsg(),Status.Logged.getCode(),jsonObject1);

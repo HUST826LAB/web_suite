@@ -25,7 +25,7 @@ public interface TUserDao {
     @Select("SELECT COUNT(*) FROM t_user WHERE user_id = #{id} AND status!=0")
     Integer countUserCountById(Long id);
 
-    @Select("SELECT user_id,score,gold,sex,blood,constellation,address FROM t_user WHERE user_id = #{id} AND status!=0")
+    @Select("SELECT user_id,score,gold,sex,blood,constellation,address,`group` FROM t_user WHERE user_id = #{id} AND status!=0")
     TUser getUserScoreAndGoldByID(Long id);
 
     @Update("UPDATE t_user SET gold = #{gold},score = #{score} WHERE user_id = #{user_id}")
