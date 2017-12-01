@@ -9,7 +9,6 @@
     <list default="true" id="a20a3c11-459a-43df-a796-a7bfdb924f70" name="Default" comment="增加groupDetail接口，具体详情见wiki">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/Print.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/cotech/dao/TUserDao.java" afterPath="$PROJECT_DIR$/src/main/java/com/cotech/dao/TUserDao.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/jdbc.properties" afterPath="$PROJECT_DIR$/src/main/resources/jdbc.properties" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/Test.java" afterPath="$PROJECT_DIR$/src/test/Test.java" />
     </list>
@@ -572,7 +571,7 @@
       <workItem from="1511438277748" duration="2105000" />
       <workItem from="1512016247119" duration="6425000" />
       <workItem from="1512032786118" duration="10676000" />
-      <workItem from="1512097303502" duration="5033000" />
+      <workItem from="1512097303502" duration="5108000" />
     </task>
     <task id="LOCAL-00001" summary="增加autoReconnect=true">
       <created>1508768063850</created>
@@ -728,11 +727,18 @@
       <option name="project" value="LOCAL" />
       <updated>1512100834797</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="增加groupDetail接口的排序（按score降序）">
+      <created>1512102481568</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1512102481568</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="236154000" />
+    <option name="totallyTimeSpent" value="236229000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -820,7 +826,8 @@
     <MESSAGE value="增加了队伍的删除功能，增加了限制使得队伍不能有相同的名称。增加组别成员数和成绩数的加减逻辑" />
     <MESSAGE value="增加groupDetail接口，具体详情见wiki" />
     <MESSAGE value="增加groupDetail接口，详情见WIKI" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加groupDetail接口，详情见WIKI" />
+    <MESSAGE value="增加groupDetail接口的排序（按score降序）" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加groupDetail接口的排序（按score降序）" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
