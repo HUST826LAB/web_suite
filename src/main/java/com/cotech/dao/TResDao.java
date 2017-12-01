@@ -1,10 +1,15 @@
 package com.cotech.dao;
 
+import com.cotech.model.GroupDetail;
 import com.cotech.model.TRes;
+import com.cotech.model.TUser;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 @Repository("TResDao")
@@ -40,4 +45,8 @@ public interface TResDao {
 
     @Select("SELECT COUNT(distinct cookie_id) FROM t_res WHERE score > #{score} AND `group` = #{group}")
     Long countSumGroupGreaterScore(TRes res);
+
+    @Select("SELECT COUNT(res_id) AS sum,user_id,MAX(create_time) AS lastTime FROM t_res GROUP BY user_id HAVING user_id IN (${user_ids})")
+    List<GroupDetail> selectSumbyUserId(@Param("user_ids")String user_ids);
+
 }

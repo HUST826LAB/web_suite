@@ -2,6 +2,7 @@ package com.cotech.service;
 
 import com.cotech.dao.TResDao;
 import com.cotech.dao.TUserDao;
+import com.cotech.model.GroupDetail;
 import com.cotech.model.TRes;
 import com.cotech.model.TopTenList;
 import org.slf4j.Logger;
@@ -57,6 +58,10 @@ public class TResService {
 
     public Long countResCountCookieId(TRes res){
         return TResDao.countResCountCookieId(res);
+    }
+
+    public List<GroupDetail> selectSumbyUserId(String user_ids){
+        return TResDao.selectSumbyUserId(user_ids);
     }
 
 }

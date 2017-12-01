@@ -3,9 +3,12 @@ package com.cotech.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.cotech.enums.Status;
+import com.cotech.model.GroupDetail;
 import com.cotech.model.PageVo;
 import com.cotech.model.TGroup;
 import com.cotech.service.TGroupService;
+import com.cotech.service.TResService;
+import com.cotech.service.TUserService;
 import com.cotech.util.JsonUtil;
 import com.cotech.util.ParamCheck;
 import com.cotech.util.WrapJson;
@@ -20,9 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 
 @Controller
@@ -30,6 +31,12 @@ public class GroupController {
 
     @Resource
     private TGroupService TGroupService;
+
+    @Resource
+    private TUserService TUserService;
+
+    @Resource
+    private TResService TResService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -126,4 +133,54 @@ public class GroupController {
         return JsonUtil.getInstense().getJsonp(jsonObject,callback);
     }
 
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "groupDetail")
+    public MappingJacksonValue groupDetailController(HttpServletRequest request, @RequestBody String param, @RequestParam(value = "callback", required = false) String callback) {
+        logger.debug("groupDetail接口收到来自" + request.getRemoteAddr() + "的请求！param="+param);
+        JSONObject jsonObject = new JSONObject();
+        List<GroupDetail> lst = new LinkedList<GroupDetail>();
+        List<GroupDetail> lst2 = new LinkedList<GroupDetail>();
+        PageVo pageVo = new PageVo();
+        WrapJson.wrapJson(jsonObject, Status.ParamError.getMsg(),Status.ParamError.getCode(),null);
+        try{
+            JSONObject paramJson = (JSONObject) JSON.parse(param);
+            pageVo.setCurrent(ParamCheck.paramNotNull(paramJson.getLong("current")));
+            pageVo.setPageLen(ParamCheck.paramNotZeroNotNull(paramJson.getLong("pageLen")));
+            pageVo.setCurrent(pageVo.getCurrent()*pageVo.getPageLen());
+            pageVo.setKey(ParamCheck.paramNotEmptyNotNull(paramJson.getString("group_id")));
+        }catch (Exception e){
+            logger.debug("参数错误:"+e.getMessage());
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+        }
+        try {
+            lst = TUserService.selectUserIdByGroup(pageVo);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < lst.size(); i++)
+                stringBuilder.append(lst.get(i).getUser_id()+",");
+            stringBuilder.deleteCharAt(stringBuilder.length()-1);
+            String keys = stringBuilder.toString();
+            lst2 = TResService.selectSumbyUserId(keys);
+            for (int i = 0; i < lst.size(); i++) {
+                for (int j = 0; j < lst2.size(); j++) {
+                    if (lst.get(i).getUser_id().equals(lst2.get(j).getUser_id())){
+                        lst.get(i).setLastTime(lst2.get(j).getLastTime());
+                        lst.get(i).setSum(lst2.get(j).getSum());
+                        lst2.remove(j);
+                        break;
+                    }
+                }
+            }
+            JSONObject resJson = new JSONObject();
+            Long sum = TUserService.countuserByGroup(pageVo);
+            resJson.put("groupLst",lst);
+            resJson.put("sum",sum);
+            WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),resJson);
+        }catch (Exception e){
+            logger.debug("操作数据库错误:"+e.getMessage());
+            WrapJson.wrapJson(jsonObject, Status.Error.getMsg(),Status.Error.getCode(),null);
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+        }
+        return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+    }
 }

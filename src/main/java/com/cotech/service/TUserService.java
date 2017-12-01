@@ -1,6 +1,8 @@
 package com.cotech.service;
 
 import com.cotech.dao.TUserDao;
+import com.cotech.model.GroupDetail;
+import com.cotech.model.PageVo;
 import com.cotech.model.TUser;
 import com.cotech.model.TopTenList;
 import org.slf4j.Logger;
@@ -61,5 +63,13 @@ public class TUserService {
 
     public TUser getUserZone(TUser user){
         return TUserDao.getUserZone(user);
+    }
+
+    public List<GroupDetail> selectUserIdByGroup(PageVo pageVo){
+        return TUserDao.selectUserIdByGroup(pageVo);
+    }
+
+    public Long countuserByGroup(PageVo pageVo){
+        return TUserDao.countuserByGroup(pageVo);
     }
 }
