@@ -52,7 +52,7 @@ public interface TUserDao {
     @Select("SELECT `status`,username,uname,score,gold,`group` FROM t_user WHERE user_id=#{user_id} AND `status` !=0")
     TUser getUserZone(TUser user);
 
-    @Select("SELECT user_id,username,uname,score FROM t_user WHERE status !=0 AND `group` = #{key} LIMIT #{current},#{pageLen}")
+    @Select("SELECT user_id,username,uname,score FROM t_user WHERE status !=0 AND `group` = #{key}  ORDER BY score DESC LIMIT #{current},#{pageLen}")
     List<GroupDetail> selectUserIdByGroup(PageVo pageVo);
 
     @Select("SELECT count(user_id) FROM t_user WHERE `group` = #{key}")
