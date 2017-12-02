@@ -139,8 +139,6 @@ public class GroupController {
     public MappingJacksonValue groupDetailController(HttpServletRequest request, @RequestBody String param, @RequestParam(value = "callback", required = false) String callback) {
         logger.debug("groupDetail接口收到来自" + request.getRemoteAddr() + "的请求！param="+param);
         JSONObject jsonObject = new JSONObject();
-        List<GroupDetail> lst = new LinkedList<GroupDetail>();
-        List<GroupDetail> lst2 = new LinkedList<GroupDetail>();
         PageVo pageVo = new PageVo();
         WrapJson.wrapJson(jsonObject, Status.ParamError.getMsg(),Status.ParamError.getCode(),null);
         try{
@@ -154,27 +152,32 @@ public class GroupController {
             return JsonUtil.getInstense().getJsonp(jsonObject,callback);
         }
         try {
-            lst = TUserService.selectUserIdByGroup(pageVo);
+            List<GroupDetail> lst = TUserService.selectUserIdByGroup(pageVo);
             StringBuilder stringBuilder = new StringBuilder();
             for (int i = 0; i < lst.size(); i++)
                 stringBuilder.append(lst.get(i).getUser_id()+",");
             stringBuilder.deleteCharAt(stringBuilder.length()-1);
             String keys = stringBuilder.toString();
-            lst2 = TResService.selectSumbyUserId(keys);
+            LinkedList<GroupDetail> lst2 = TResService.selectSumbyUserId(keys);
+            Map<String,Integer> maps = new HashMap<String, Integer>();
             for (int i = 0; i < lst.size(); i++) {
-                for (int j = 0; j < lst2.size(); j++) {
-                    if (lst.get(i).getUser_id().equals(lst2.get(j).getUser_id())){
-                        lst.get(i).setLastTime(lst2.get(j).getLastTime());
-                        lst.get(i).setSum(lst2.get(j).getSum());
-                        lst2.remove(j);
-                        break;
-                    }
-                }
+                maps.put(lst.get(i).getUser_id(),i);
+            }
+            int index;
+            while (lst2.size()>0){
+                index = maps.get(lst2.getFirst().getUser_id());
+                lst.get(index).setLastTime(lst2.getFirst().getLastTime());
+                lst.get(index).setSum(lst2.getFirst().getSum());
+                lst2.removeFirst();
             }
             JSONObject resJson = new JSONObject();
             Long sum = TUserService.countuserByGroup(pageVo);
-            resJson.put("groupLst",lst);
+            if (sum % pageVo.getPageLen() == 0)
+                sum = sum / pageVo.getPageLen();
+            else
+                sum = sum / pageVo.getPageLen() + 1;
             resJson.put("sum",sum);
+            resJson.put("groupLst",lst);
             WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),resJson);
         }catch (Exception e){
             logger.debug("操作数据库错误:"+e.getMessage());

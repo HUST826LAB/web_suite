@@ -1,6 +1,7 @@
 package com.cotech.dao;
 
 import com.cotech.model.GroupDetail;
+import com.cotech.model.PageVo;
 import com.cotech.model.TRes;
 import com.cotech.model.TUser;
 import org.apache.ibatis.annotations.Insert;
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -27,8 +29,8 @@ public interface TResDao {
     @Select("SELECT ip,device,res_id,user_id,referee,score,gold,`group` FROM t_res WHERE res_id = #{res_id}")
     TRes getResByID(Long res_id);
 
-    @Insert("INSERT INTO t_res (cookie_id,user_id,address,coordinate,time_len,deviation,score,gold,device,ip,create_time,`group`,location_id,referee)" +
-            "VALUES (#{cookie_id},#{user_id},#{address},#{coordinate},#{time_len},#{deviation},#{score},#{gold},#{device},#{ip},#{create_time},#{group},#{location_id},#{referee})")
+    @Insert("INSERT INTO t_res (blood,cookie_id,user_id,address,coordinate,time_len,deviation,score,gold,device,ip,create_time,`group`,location_id,referee)" +
+            "VALUES (#{blood},#{cookie_id},#{user_id},#{address},#{coordinate},#{time_len},#{deviation},#{score},#{gold},#{device},#{ip},#{create_time},#{group},#{location_id},#{referee})")
     void saveGameMain(TRes tRes);
 
     @Update("UPDATE t_res SET user_id=#{user_id},constellation=#{constellation},blood=#{blood},sex=#{sex} WHERE res_id = #{res_id}")
@@ -47,6 +49,11 @@ public interface TResDao {
     Long countSumGroupGreaterScore(TRes res);
 
     @Select("SELECT COUNT(res_id) AS sum,user_id,MAX(create_time) AS lastTime FROM t_res GROUP BY user_id HAVING user_id IN (${user_ids})")
-    List<GroupDetail> selectSumbyUserId(@Param("user_ids")String user_ids);
+    LinkedList<GroupDetail> selectSumbyUserId(@Param("user_ids")String user_ids);
 
+    @Select("SELECT res_id,user_id,score,create_time,time_Len,blood FROM t_res WHERE user_id = #{key} ORDER BY create_time DESC LIMIT #{current},#{pageLen}")
+    List<TRes> selectResByUserID(PageVo pageVo);
+
+    @Select("SELECT COUNT(res_id) FROM t_res WHERE user_id = #{key}")
+    Long countResUserId(PageVo pageVo);
 }

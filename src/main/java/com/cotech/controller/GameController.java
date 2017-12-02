@@ -83,6 +83,7 @@ public class GameController {
             res.setCreate_time((new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(new Date()));
             res.setReferee(checkNotNull(Long.valueOf((String) paramJson.get("referee"))));
             res.setUser_id(checkNotNull(Long.valueOf((String) paramJson.get("user_id"))));
+            res.setBlood(checkNotNull(paramJson.getLong("blood")));
             res.setLocation_id(Hashing.md5().newHasher().putString(res.getCreate_time()+new Random().nextLong(), Charsets.UTF_8).hash().toString());
         } catch (SQLException e){
             logger.debug("不是圆");
@@ -143,9 +144,9 @@ public class GameController {
             Long score = user.getScore();
             res.setUser_id(user.getUser_id());
 //            res.setAddress(user.getAddress());
-            res.setSex(user.getSex());
-            res.setConstellation(user.getConstellation());
-            res.setBlood(user.getBlood());
+//            res.setSex(user.getSex());
+//            res.setConstellation(user.getConstellation());
+//            res.setBlood(user.getBlood());
             //更新res表
             TResService.updateResDetail(res);
             if ((score < res.getScore())) {

@@ -11,7 +11,7 @@ public class TRes implements Serializable {
   private String device;
   private Integer sex;
   private Integer constellation;
-  private Integer blood;
+  private Long blood;
   private String address;
   private Long score;
   private Long gold;
@@ -86,11 +86,11 @@ public class TRes implements Serializable {
     this.constellation = constellation;
   }
 
-  public Integer getBlood() {
+  public Long getBlood() {
     return blood;
   }
 
-  public void setBlood(Integer blood) {
+  public void setBlood(Long blood) {
     this.blood = blood;
   }
 

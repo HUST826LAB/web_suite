@@ -2,9 +2,8 @@ package com.cotech.util;
 
 import com.alibaba.fastjson.JSONObject;
 
-import java.util.List;
 
-public final class WrapJson<E> {
+public final class WrapJson {
 
     private WrapJson() {}
 

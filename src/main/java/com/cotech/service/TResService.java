@@ -3,6 +3,7 @@ package com.cotech.service;
 import com.cotech.dao.TResDao;
 import com.cotech.dao.TUserDao;
 import com.cotech.model.GroupDetail;
+import com.cotech.model.PageVo;
 import com.cotech.model.TRes;
 import com.cotech.model.TopTenList;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -60,8 +62,15 @@ public class TResService {
         return TResDao.countResCountCookieId(res);
     }
 
-    public List<GroupDetail> selectSumbyUserId(String user_ids){
+    public LinkedList<GroupDetail> selectSumbyUserId(String user_ids){
         return TResDao.selectSumbyUserId(user_ids);
     }
 
+    public List<TRes> selectResByUserID(PageVo pageVo){
+        return TResDao.selectResByUserID(pageVo);
+    }
+
+    public Long countResUserId(PageVo pageVo){
+        return TResDao.countResUserId(pageVo);
+    }
 }

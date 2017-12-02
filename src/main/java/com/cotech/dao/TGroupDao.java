@@ -2,7 +2,6 @@ package com.cotech.dao;
 
 import com.cotech.model.PageVo;
 import com.cotech.model.TGroup;
-import com.cotech.model.TUser;
 import com.cotech.model.TopTenList;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
