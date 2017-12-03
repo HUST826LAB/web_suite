@@ -56,4 +56,14 @@ public interface TResDao {
 
     @Select("SELECT COUNT(res_id) FROM t_res WHERE user_id = #{key}")
     Long countResUserId(PageVo pageVo);
+
+    @Select("SELECT res_id,coordinate,address,blood FROM t_res WHERE res_id = #{res_id}")
+    TRes getGameDetail(TRes res);
+
+    //just for wrap
+//    @Select("SELECT res_id,blood,address FROM t_res")
+//    LinkedList<TRes> selectAll();
+//    @Update("UPDATE t_res SET blood = #{blood} , address = #{address} WHERE res_id = #{res_id}")
+//    void updateAll(TRes res);
+
 }

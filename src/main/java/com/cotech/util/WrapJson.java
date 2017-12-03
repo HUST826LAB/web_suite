@@ -18,4 +18,5 @@ public final class WrapJson {
         jsonObject.put("code",code);
         jsonObject.put("data",data);
     }
+
 }

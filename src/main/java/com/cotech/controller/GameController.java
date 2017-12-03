@@ -13,6 +13,7 @@ import com.cotech.service.TResService;
 import com.cotech.service.TUserService;
 import com.cotech.util.JsonUtil;
 import com.cotech.util.ParamCheck;
+import com.cotech.util.WarpParam;
 import com.cotech.util.WrapJson;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
@@ -64,7 +65,7 @@ public class GameController {
         try{
             JSONObject paramJson = (JSONObject) JSON.parse(param);
             if(paramJson.containsKey("summit")){
-                res.setAddress("triangle:"+paramJson.getString("summit"));
+                res.setAddress(WarpParam.wrapTriangle(paramJson.getString("summit")));
             }else if (paramJson.containsKey("circle_r")){
                 circle.setCircle_r(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_r"))));
                 circle.setCircle_y(ParamCheck.paramNotNull(Double.valueOf((String) paramJson.get("circle_y"))));

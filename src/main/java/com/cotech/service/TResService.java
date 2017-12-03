@@ -73,4 +73,16 @@ public class TResService {
     public Long countResUserId(PageVo pageVo){
         return TResDao.countResUserId(pageVo);
     }
+
+    public TRes getGameDetail(TRes res){
+        return TResDao.getGameDetail(res);
+    }
+
+    //just for wrap
+//    public LinkedList<TRes> selectAll(){
+//        return TResDao.selectAll();
+//    }
+//    public void updateAll(TRes res){
+//        TResDao.updateAll(res);
+//    }
 }

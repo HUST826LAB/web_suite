@@ -33,6 +33,6 @@ public class Circle implements Serializable{
 
     @Override
     public String toString(){
-        return "circle_x:"+circle_x+"circle_y:"+circle_y+"circle_r:"+circle_r;
+        return "{\"circle_x\":"+circle_x+",\"circle_y\":"+circle_y+",\"circle_r\":"+circle_r+"}";
     }
 }

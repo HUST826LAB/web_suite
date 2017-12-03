@@ -9,6 +9,7 @@ import com.cotech.service.TResService;
 import com.cotech.service.TUserService;
 import com.cotech.util.JsonUtil;
 import com.cotech.util.ParamCheck;
+import com.cotech.util.WarpParam;
 import com.cotech.util.WrapJson;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
@@ -204,7 +205,7 @@ public class UserController {
     @ResponseBody
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "userDetail")
-    public MappingJacksonValue groupDetailController(HttpServletRequest request, @RequestBody String param, @RequestParam(value = "callback", required = false) String callback) {
+    public MappingJacksonValue userDetailController(HttpServletRequest request, @RequestBody String param, @RequestParam(value = "callback", required = false) String callback) {
         logger.debug("userDetail接口收到来自" + request.getRemoteAddr() + "的请求！param="+param);
         JSONObject jsonObject = new JSONObject();
         PageVo pageVo = new PageVo();
@@ -237,4 +238,71 @@ public class UserController {
         }
         return JsonUtil.getInstense().getJsonp(jsonObject,callback);
     }
+
+    /**
+     *
+     * @param request
+     * @param param
+     * @param callback
+     * @return
+     *
+     * 用户游戏详情接口
+     * author:陈震威
+     * bug联系方式：zhenweichen.ron@foxmail.com
+     * 敬祝码祺
+     */
+    @ResponseBody
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "userGameDetail")
+    public MappingJacksonValue userGameDetailController(HttpServletRequest request, @RequestBody String param, @RequestParam(value = "callback", required = false) String callback) {
+        logger.debug("userGameDetail接口收到来自" + request.getRemoteAddr() + "的请求！param="+param);
+        JSONObject jsonObject = new JSONObject();
+        TRes res = new TRes();
+        WrapJson.wrapJson(jsonObject, Status.ParamError.getMsg(),Status.ParamError.getCode(),null);
+        try{
+            JSONObject paramJson = (JSONObject) JSON.parse(param);
+            res.setRes_id(paramJson.getLong("res_id"));
+        }catch (Exception e){
+            logger.debug("参数错误:"+e.getMessage());
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+        }
+        try {
+            res = TResService.getGameDetail(res);
+            JSONObject resJson = new JSONObject();
+            JSONObject detailJson = new JSONObject();
+            JSONObject datumJson = (JSONObject) JSON.parse(res.getAddress());
+            detailJson.put("res_id",res.getRes_id());
+            detailJson.put("coordinate",res.getCoordinate());
+            detailJson.put("type",res.getBlood());
+            resJson.put("resDetail",detailJson);
+            resJson.put("datum",datumJson);
+            WrapJson.wrapJson(jsonObject, Status.SUCCESS.getMsg(),Status.SUCCESS.getCode(),resJson);
+        }catch (Exception e){
+            logger.debug("操作数据库错误:"+e.getMessage());
+            WrapJson.wrapJson(jsonObject, Status.Error.getMsg(),Status.Error.getCode(),null);
+            return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+        }
+        return JsonUtil.getInstense().getJsonp(jsonObject,callback);
+    }
+
+    //just for wrap
+//    @ResponseBody
+//    @RequestMapping(value = "warp")
+//    public String warp() {
+//        LinkedList<TRes> resList = TResService.selectAll();
+//        while (resList.size()>0){
+//            TRes res = resList.getFirst();
+//            if (res.getAddress()!=null&&!"".equals(res.getAddress())){
+//                if (res.getAddress().contains("triangle")){
+//                    res.setBlood(1l);
+//                    res.setAddress(WarpParam.wrapTriangle(res.getAddress()));
+//                }else {
+//                    res.setAddress(WarpParam.wrapCircle(res.getAddress()));
+//                }
+//                TResService.updateAll(res);
+//            }
+//            resList.removeFirst();
+//        }
+//        return "success";
+//    }
 }
